@@ -19,16 +19,13 @@ do
   sleep 1
   echo "Still waiting"
 done
-
-sleep 5
-
-testpid=$(jps | grep surefire | awk '{print $1}')
+sleep 10
 bmsubmit.sh -u
+testpid=$(jps | grep surefire | awk '{print $1}')
 bminstall.sh $testpid
-
 bmsubmit.sh $file
 bmsubmit.sh
-sleep 15
+sleep 10
 grep 'BM' $logfile > ~/log/log_compare/python/logs/current_b$id.log
 awk '/Start Stack Trace/,/End Stack Trace/' $logfile >> ~/log/log_compare/python/logs/current_b$id.log
 echo $logfile

@@ -1,70 +1,64 @@
-[BM][IPC Server handler 5 on 37505]ID=0,0
-[BM][IPC Server handler 6 on 37505]ID=0,0
-[BM][IPC Server handler 5 on 37505]ID=0,0
-[BM][IPC Server handler 6 on 37505]ID=0,0
-[BM][IPC Server handler 7 on 37505]ID=0,0
-[BM][IPC Server handler 9 on 37505]ID=0,0
-[BM][IPC Server handler 7 on 37505]ID=0,0
-[BM][IPC Server handler 8 on 37505]ID=0,0
-[BM][IPC Server handler 9 on 37505]ID=0,0
-[BM][IPC Server handler 8 on 37505]ID=0,0
-[BM][IPC Server handler 3 on 37505][Target],ID=-1,134217728
-[BM][IPC Server handler 3 on 37505][Target],ID=-1,134217728
-[BM][IPC Server handler 3 on 37505][Target],ID=-1,134217728
-[BM][IPC Server handler 3 on 37505][Target],ID=-1,134217728
-[BM][IPC Server handler 3 on 37505]ID=0,0
-[BM][IPC Server handler 3 on 37505]ID=0,0
-[BM][IPC Server handler 3 on 37505]ID=0,0
-[BM][IPC Server handler 3 on 37505]ID=0,0
-[BM][IPC Server handler 3 on 37505]ID=0,0
-[BM][IPC Server handler 3 on 37505]ID=0,0
-[BM][Thread-209]ID=0,0
-[BM][Thread-209]ID=1,0
-[BM][DataXceiver for client /127.0.0.1:42278 [Waiting for operation #1]]ID=0,0
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:42278 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=0,0
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:42278 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=1,134217728
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:42278 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=0,0
-[BM][DataXceiver for client /127.0.0.1:55110 [Waiting for operation #1]]ID=0,0
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:55110 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=0,0
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:55110 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=1,134217728
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:55110 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=0,0
-[BM][DataXceiver for client /127.0.0.1:59556 [Waiting for operation #1]]ID=0,0
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:59556 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=0,0
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:59556 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=1,134217728
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:59556 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=0,0
-[BM][IPC Server handler 5 on 37505]ID=0,134217728
-[BM][IPC Server handler 5 on 37505]ID=0,134217728
-[BM][IPC Server handler 5 on 37505]ID=0,134217728
-[BM][IPC Server handler 7 on 37505]ID=0,134217728
-[BM][IPC Server handler 9 on 37505]ID=0,134217728
-[BM][IPC Server handler 7 on 37505]ID=0,134217728
-[BM][IPC Server handler 7 on 37505]ID=0,134217728
-[BM][IPC Server handler 9 on 37505]ID=0,134217728
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:42278 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=1,1024
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:55110 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=1,1024
-[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-1633135793_1 at /127.0.0.1:59556 [Receiving block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]]ID=1,1024
-[BM][ResponseProcessor for block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]ID=1,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=LAST_IN_PIPELINE, downstreams=0:[]]ID=1,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=LAST_IN_PIPELINE, downstreams=0:[]]ID=0,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=LAST_IN_PIPELINE, downstreams=0:[]]ID=0,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=1,1024
-[BM][IPC Server handler 8 on 37505]ID=0,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
-[BM][IPC Server handler 8 on 37505]ID=0,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
-[BM][IPC Server handler 4 on 37505]ID=0,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=1,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
-[BM][PacketResponder: BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
-[BM][ResponseProcessor for block BP-1003986705-172.31.40.143-1687822802382:blk_1073741825_1001]ID=1,1024
-[BM][IPC Server handler 2 on 37505]ID=0,1024
-[BM][IPC Server handler 4 on 37505]ID=0,1024
-[BM][IPC Server handler 1 on 37505]ID=0,1024
-[BM][IPC Server handler 2 on 37505]ID=0,1024
-[BM][IPC Server handler 1 on 37505]ID=0,1024
-[BM][IPC Server handler 1 on 37505]ID=0,1024
-[BM][IPC Server handler 0 on 37505]ID=1,9223372036854775807
-[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@201a4587][Target],ID=-1,9223372036854775807
-[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data9/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data10/]]  heartbeating to localhost/127.0.0.1:37505]ID=0,9223372036854775807
-[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data5/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data6/]]  heartbeating to localhost/127.0.0.1:37505]ID=0,9223372036854775807
-[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data7/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data8/]]  heartbeating to localhost/127.0.0.1:37505]ID=0,9223372036854775807
+[BM][IPC Server handler 2 on 40659][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.isGoodTarget(BlockPlacementPolicyDefault.java:-1)
+[BM][IPC Server handler 2 on 40659]ID=1,
+[BM][IPC Server handler 2 on 40659]ID=0,
+[BM][IPC Server handler 2 on 40659]ID=7,
+[BM][IPC Server handler 2 on 40659]ID=6,
+[BM][IPC Server handler 2 on 40659]ID=4,
+[BM][IPC Server handler 2 on 40659]ID=3,
+[BM][IPC Server handler 2 on 40659]ID=10,
+[BM][IPC Server handler 2 on 40659]ID=12,
+[BM][IPC Server handler 2 on 40659]ID=14,
+[BM][IPC Server handler 2 on 40659][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.isGoodTarget(BlockPlacementPolicyDefault.java:-1)
+[BM][IPC Server handler 2 on 40659]ID=1,
+[BM][IPC Server handler 2 on 40659]ID=0,
+[BM][IPC Server handler 2 on 40659]ID=7,
+[BM][IPC Server handler 2 on 40659]ID=6,
+[BM][IPC Server handler 2 on 40659]ID=4,
+[BM][IPC Server handler 2 on 40659]ID=3,
+[BM][IPC Server handler 2 on 40659]ID=10,
+[BM][IPC Server handler 2 on 40659]ID=9,
+[BM][IPC Server handler 2 on 40659]ID=12,
+[BM][IPC Server handler 2 on 40659]ID=14,
+[BM][IPC Server handler 2 on 40659][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.isGoodTarget(BlockPlacementPolicyDefault.java:-1)
+[BM][IPC Server handler 2 on 40659]ID=1,
+[BM][IPC Server handler 2 on 40659]ID=0,
+[BM][IPC Server handler 2 on 40659]ID=7,
+[BM][IPC Server handler 2 on 40659]ID=6,
+[BM][IPC Server handler 2 on 40659]ID=4,
+[BM][IPC Server handler 2 on 40659]ID=3,
+[BM][IPC Server handler 2 on 40659]ID=10,
+[BM][IPC Server handler 2 on 40659]ID=9,
+[BM][IPC Server handler 2 on 40659]ID=12,
+[BM][IPC Server handler 2 on 40659]ID=14,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.isGoodTarget(BlockPlacementPolicyDefault.java:-1)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=1,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=0,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=7,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=6,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=4,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=3,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=8,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.isGoodTarget(BlockPlacementPolicyDefault.java:-1)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=1,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=0,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=7,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=6,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=4,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=3,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=8,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.isGoodTarget(BlockPlacementPolicyDefault.java:-1)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=1,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=0,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=7,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=6,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=4,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=3,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=8,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.isGoodTarget(BlockPlacementPolicyDefault.java:-1)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=1,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=0,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=7,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=6,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=4,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=3,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=8,

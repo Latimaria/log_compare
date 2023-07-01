@@ -6,7 +6,6 @@ import time
 import subprocess
 import os
 import glob
-import sys
 
 input_path = '/home/ubuntu/instructions.txt'
 bash_path = '/home/ubuntu/log/log_compare/python/run.sh'
@@ -344,26 +343,7 @@ def run():
             # break
         time.sleep(2)  
 
-def run_prev():
-    step = 1
-    print('\nstep {step}\n')
-    
-    while True: 
-        for root, dirs, files in os.walk('/home/ubuntu/log/prev_logs/', topdown=False):
-            for file in files:
-                if "step{step}" in file:
-                    print(file)  
-        
-        step += 1
-        input("continue?\n")
-        
-if len(sys.argv)==2:
-    if sys.argv[1] == "prev":
-        run_prev()
-    else:
-        run()
-else:
-    run()
+run()
 
 #process_command('instructions.txt')
 
