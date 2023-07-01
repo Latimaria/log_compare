@@ -6,7 +6,6 @@ Log::Log(const Log& other) {
     to_parse = other.to_parse;
     parsed = other.parsed;
     entry = other.entry;
-    // loopIds_count = 0;
     contexts[-1] = nullptr;
 }
 
@@ -15,10 +14,10 @@ Log& Log::operator=(const Log& rhs) {
         to_parse = rhs.to_parse;
         parsed = rhs.parsed;
         entry = rhs.entry;
-        // loopIds = rhs.loopIds;
         loopStartIds = rhs.loopStartIds;
-        // loopEndIds = rhs.loopEndIds;
-        // loopIds_count = rhs.loopIds_count;
+        parentLoop = rhs.parentLoop;
+        ids_seen = rhs.ids_seen;
+        contexts = rhs.contexts; contextMap = rhs.contextMap;
     }
     return *this;
 }
@@ -36,7 +35,7 @@ static const std::regex numRegex("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$");
 bool is_number(std::string str){   
     return std::regex_match(str, numRegex);
 }
-Event* Log::parseNextLine() {
+Event* Log::parseNextLine() { // parse next line of log
     if(to_parse.empty()){
         return nullptr;
     }
@@ -45,9 +44,9 @@ Event* Log::parseNextLine() {
     std::string::size_type temp_id;
     std::string line = to_parse.front();
     
-    temp_id = line.find("Method Entry");
-    if(temp_id != std::string::npos){ // is Method Entry
-        // std::cout << "HERE" << std::endl;
+    temp_id = line.find("Method Entry"); // assume method entry is in the form :
+                                          //  // [Method Entry]class.method(file:line number)
+    if(temp_id != std::string::npos){ 
         line = line.substr(temp_id+14);
         entry = line;
         temp_id = line.find("(");
@@ -57,15 +56,14 @@ Event* Log::parseNextLine() {
             e->value = line.substr(0, temp_id);
             line = line.substr(temp_id+1);
         }
-        temp_id = line.find(":");
+        temp_id = line.find(":"); // the line number (or -1 if not found)
         if(temp_id != std::string::npos){
             std::stringstream ss(line.substr(temp_id+1));
             int id=-1; ss >> id;
             e->lineNum = id; 
         }
-        // std::cout << "HERE " << e->lineNum << std::endl;
     }
-    // is ID=
+    // if is not a method entry; if there is ID= after [Methoid Entry], rewrites its ID 
     temp_id = line.find("ID="); // std::cout << "ID! " << std::endl;
     if(temp_id != std::string::npos){
         line = line.substr(temp_id+3);
@@ -77,10 +75,9 @@ Event* Log::parseNextLine() {
             e = new Event(id);
         }
         
-        if(temp_id != std::string::npos){ // after ,
-            // std::cout << "LINE " << line << std::endl;
+        if(temp_id != std::string::npos){ // the part after ,
             line = line.substr(temp_id+1);
-            temp_id = line.find("loop="); 
+            temp_id = line.find("loop="); // loop Id, if exist
             if(temp_id != std::string::npos){
                 line = line.substr(temp_id+5); // after loop=
                 
@@ -106,7 +103,7 @@ Event* Log::parseNextLine() {
     to_parse.pop_front();
     if(e==nullptr){
         std::cout << "parse fail: " << line << std::endl;
-        return nullptr;
+        return nullptr; // failed to parse
     }
     // if(e!=nullptr && e->lineNum==6 && e->value=="true"){
     //     fail = true;
@@ -122,7 +119,7 @@ Event* Log::parseNextLine() {
 //        }
 //    }
 //    
-    if(e->loopId>-1 && ids_seen.find(e->loopId)==ids_seen.end()){ // is new loop
+    if(e->loopId>-1 && ids_seen.find(e->loopId)==ids_seen.end()){ // is a new loop
         loopStartIds.insert({e->lineNum, e->loopId});
         ids_seen.insert(e->loopId);
     }
@@ -154,8 +151,8 @@ Event* Log::parseNextLine() {
     return e;
 }
 
-bool Log::set_contexts(std::vector<int>& contexts, int n){
-    parseAll();
+bool Log::set_contexts(std::vector<int>& contexts, int n){ 
+    parseAll(); // manually set the contexts for testing, shouldn't use this 
     int size = parsed.size();
     for(int i=0; i<n&&i<size; i++){
         parsed[i]->context = parsed[contexts[i]];
@@ -185,24 +182,18 @@ bool Log::parseAll(){
 
 
 
-int compare_one_log(Log* A, Log* B){
-    int idx = 0; 
+int compare_one_log(Log* A, Log* B){ // this is dead lock compare, not considering loops
+    int idx = 0;                     // only need to return length since the prefix must be continuous
     int nA = A->parsed.size() + A->to_parse.size();
     int nB = B->parsed.size() + B->to_parse.size();
-    //std::cout << "nA " << nA << " nB" << nB << std::endl;
     while((idx < nA) && (idx < nB)){
-        // std::cout << "idx=" << idx << " " ;
         Event* ef = A->getEvent(idx); 
         Event* es = B->getEvent(idx); 
-        // ef->print(); std::cout << " "; es->print(); std::cout << std::endl;
-        // std::cout << "es " << es->lineNum << " ef " << ef->lineNum << " idx " << idx << std::endl ;
         if(*es != *ef){ // compare lineNum
-            
             break; // diverge
         }
         idx++;
     }
-    //std::cout << "return " << idx << std::endl;
     return idx; // length of common prefix
 }
 
@@ -212,7 +203,134 @@ bool Log::failed(){
     return fail;
 }
 
-std::pair<int, std::vector<Event*>> bfs_start(Log* A, Log* B){
+// assume logs have loop Ids, and all loops are map loops
+std::pair<int, std::vector<Event>> compare_log_maploops(Log* A, Log* B){
+    std::vector<Event> prefix; 
+   
+    auto result = loop_dfs(A, B);
+    int length = result.first;
+    
+    for(Event* e : result.second){
+        prefix.push_back(*e);
+    }
+    return std::make_pair(length, prefix);
+}
+
+std::pair<int, std::vector<Event*>> loop_dfs(Log* A, Log* B){ // actually bfs
+    // std::vector<Event> prefix;
+    A->parseAll(); B->parseAll();
+    int sizeA = A->parsed.size(); int sizeB = B->parsed.size();
+    std::vector<Event*> current;
+    if(sizeA==0 || sizeB==0) {return std::make_pair(0, current);}
+
+    std::queue<Node> q; // Node: Event in A and B, and depth
+    q.push({A->getEvent(0), B->getEvent(0), 1});
+    
+    int length = 0;
+
+    while (!q.empty()) {
+        Node node = q.front(); 
+        q.pop();
+        if(node.eventA==nullptr || node.eventB==nullptr){
+            continue;
+        }
+        if (*(node.eventA) == *(node.eventB)) {
+            if (node.depth > length) {
+                length = node.depth;
+                current.push_back(node.eventA);
+            }
+            // Enqueue 
+            int idxA = node.eventA->idx; int idxB = node.eventB->idx; 
+            std::vector<Event*> childrenA; // add possible next nodes to the queue
+            Event* nextA = A->getEvent(idxA+1);
+            if(nextA!=nullptr){
+                childrenA.push_back(nextA); // next event
+                if(nextA->startLoopId != -2){ // starting or immediately after ending a loop
+                    for(int i=idxA+2; i<A->parsed.size(); i++){
+                        if(A->parsed[i]->startLoopId == nextA->startLoopId){
+                            childrenA.push_back(A->parsed[i]); 
+                        }
+                    }
+                }
+            }
+                    
+            std::vector<Event*> childrenB; Event* nextB = B->getEvent(idxB+1);
+            if(nextB!=nullptr){
+                childrenB.push_back(nextB); // next event
+                if(nextB->startLoopId != -2){ // starting or immediately after ending a loop
+                    for(int i=idxB+2; i<B->parsed.size(); i++){
+                        if(B->parsed[i]->startLoopId == nextB->startLoopId){
+                            childrenB.push_back(B->parsed[i]); 
+                        }
+                    }
+                }
+            }
+            
+            for (auto& childA : childrenA) {
+                // For each child in A, if it also exists in B, enqueue them
+                for (auto& childB : childrenB) {
+                    if (*childA == *childB) {
+                        q.push({childA, childB, node.depth+1});
+                    }
+                }
+            }
+        }
+    }
+    return std::make_pair(length, current);
+}
+
+
+////////////// PRINTS //////////////////////////////////////////////
+
+void Log::printParsed(){
+    for(int i=0; i<parsed.size(); i++){
+       parsed[i]->print(); 
+       std::cout << ", " ;
+    }
+    std::cout << std::endl;
+}
+
+void Log::printAll(){
+    parseAll();
+    printParsed();
+}
+void Log::printContexts(){
+    for(int i=1; i<parsed.size(); i++){
+       parsed[i]->print(); 
+       if(parsed[i]->context == nullptr){
+            std::cout << " ctx: -1";
+        }else{
+            std::cout << " ctx: ";
+            parsed[i]->context->print();
+        }
+       std::cout << std::endl ;
+    }
+    std::cout << std::endl;
+}
+void Log::printContexMaps(){
+    for(auto it : contextMap){
+        if(it.first>=0){
+            getEvent(it.first)->print();
+        }else{
+            std::cout << it.first;
+        }
+        std::cout << ": " << std::endl << "-> ";
+        for(Event* e : it.second){
+            e->print(); std::cout << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+void Log::printLoops(){
+    for(int i=0; i<parsed.size(); i++){
+       parsed[i]->print(); 
+       std::cout << " loop id: " << parsed[i]->loopId;
+       std::cout << ", " ;
+    }
+    std::cout << std::endl;
+}
+
+std::pair<int, std::vector<Event*>> bfs_start(Log* A, Log* B){ 
     // std::vector<Event> prefix;
     A->parseAll(); B->parseAll();
     int sizeA = A->parsed.size(); int sizeB = B->parsed.size();
@@ -273,91 +391,6 @@ std::pair<int, std::vector<Event>> compare_log_contexts(Log* A, Log* B){
 //    }
 //    return std::make_pair(length, prefix);
 
-}
-
-
-std::pair<int, std::vector<Event>> compare_log_maploops(Log* A, Log* B){
-//    int length = compare_one_log(A, B);
-    std::vector<Event> prefix;
-   
-    auto result = loop_dfs(A, B);
-    int length = result.first;
-    
-    // if(result.first > length){
-        for(Event* e : result.second){
-            prefix.push_back(*e);
-        }
-        return std::make_pair(length, prefix);
-
-        
-//    for(int i=0; i<length; i++){
-//        prefix.push_back(*A->getEvent(i));
-//    }
-//    return std::make_pair(length, prefix);
-
-}
-
-std::pair<int, std::vector<Event*>> loop_dfs(Log* A, Log* B){
-    // std::vector<Event> prefix;
-    A->parseAll(); B->parseAll();
-    int sizeA = A->parsed.size(); int sizeB = B->parsed.size();
-    std::vector<Event*> current;
-    if(sizeA==0 || sizeB==0) {return std::make_pair(0, current);}
-
-    std::queue<Node> q;
-    q.push({A->getEvent(0), B->getEvent(0), 1});
-    
-    int length = 0;
-
-    while (!q.empty()) {
-        Node node = q.front(); 
-        q.pop();
-        if(node.eventA==nullptr || node.eventB==nullptr){
-            continue;
-        }
-        if (*(node.eventA) == *(node.eventB)) {
-            if (node.depth > length) {
-                length = node.depth;
-                current.push_back(node.eventA);
-            }
-            // Enqueue 
-            int idxA = node.eventA->idx; int idxB = node.eventB->idx; 
-            std::vector<Event*> childrenA; 
-            Event* nextA = A->getEvent(idxA+1);
-            if(nextA!=nullptr){
-                childrenA.push_back(nextA); // next event
-                if(nextA->startLoopId != -2){ // starting or immediately after ending a loop
-                    for(int i=idxA+2; i<A->parsed.size(); i++){
-                        if(A->parsed[i]->startLoopId == nextA->startLoopId){
-                            childrenA.push_back(A->parsed[i]); 
-                        }
-                    }
-                }
-            }
-                    
-            std::vector<Event*> childrenB; Event* nextB = B->getEvent(idxB+1);
-            if(nextB!=nullptr){
-                childrenB.push_back(nextB); // next event
-                if(nextB->startLoopId != -2){ // starting or immediately after ending a loop
-                    for(int i=idxB+2; i<B->parsed.size(); i++){
-                        if(B->parsed[i]->startLoopId == nextB->startLoopId){
-                            childrenB.push_back(B->parsed[i]); 
-                        }
-                    }
-                }
-            }
-            
-            for (auto& childA : childrenA) {
-                // For each child in A, if it also exists in B, enqueue them
-                for (auto& childB : childrenB) {
-                    if (*childA == *childB) {
-                        q.push({childA, childB, node.depth+1});
-                    }
-                }
-            }
-        }
-    }
-    return std::make_pair(length, current);
 }
 
 std::pair<int, std::vector<Event*>> context_bfs(Log* A, Log* B){
@@ -423,52 +456,3 @@ std::pair<int, std::vector<Event*>> context_bfs(Log* A, Log* B){
     return std::make_pair(length, current);
 }
 
-////////////// PRINTS //////////////////////////////////////////////
-
-void Log::printParsed(){
-    for(int i=0; i<parsed.size(); i++){
-       parsed[i]->print(); 
-       std::cout << ", " ;
-    }
-    std::cout << std::endl;
-}
-
-void Log::printAll(){
-    parseAll();
-    printParsed();
-}
-void Log::printContexts(){
-    for(int i=1; i<parsed.size(); i++){
-       parsed[i]->print(); 
-       if(parsed[i]->context == nullptr){
-            std::cout << " ctx: -1";
-        }else{
-            std::cout << " ctx: ";
-            parsed[i]->context->print();
-        }
-       std::cout << std::endl ;
-    }
-    std::cout << std::endl;
-}
-void Log::printContexMaps(){
-    for(auto it : contextMap){
-        if(it.first>=0){
-            getEvent(it.first)->print();
-        }else{
-            std::cout << it.first;
-        }
-        std::cout << ": " << std::endl << "-> ";
-        for(Event* e : it.second){
-            e->print(); std::cout << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-void Log::printLoops(){
-    for(int i=0; i<parsed.size(); i++){
-       parsed[i]->print(); 
-       std::cout << " loop id: " << parsed[i]->loopId;
-       std::cout << ", " ;
-    }
-    std::cout << std::endl;
-}

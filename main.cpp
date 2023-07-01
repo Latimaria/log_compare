@@ -18,54 +18,18 @@
 #define TRACE 1
 #define ARG 2
 
-std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds){
-    std::vector<Event> prefix; // longest common prefix
-    if(succeeds.size()==0) {return std::make_pair(nullptr, prefix);}
-    int max_length = 0; // longest prefix length
-    int max_total = 0;
-    int max_idx = 0;
-
-    std::pair<Log*, std::vector<Event>> out;
-    
-    for(int i=0; i<succeeds.size(); i++){
-        // int length = compare_one_log(failed, succeeds[i]);
-        // std::cout << "comapring " << i << std::endl;
-        // auto result = compare_log_contexts(failed, succeeds[i]);
-        auto result = compare_log_maploops(failed, succeeds[i]);
-        int length = result.first;
-        if(length > max_length || (length == max_length && succeeds[i]->parsed.size() > max_total) ){
-            out.first = succeeds[i];
-            out.second = result.second;
-            max_length = length; // update max length
-            max_idx = i; // the run index in vector woth longest common prefix
-            max_total = succeeds[i]->parsed.size();
-        }
-    }
-    
-    // int i = 0; Log lon(succeed_str[max_idx]); 
-    // while(i<lon.current || !lon.parsedAll()){
-    //     Event* es = lon.getEvent(i);
-    //     if(es == nullptr){
-    //         break;
-    //     }else{        
-    //         longest.push_back(*es);
-    //     }
-    //     i++;
-    // }
-    return out; //std::make_pair(max_length, succeeds[max_idx]);
-} 
-                                                                                                                        
+std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds);                                                                                                              
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
     std::string file_path = "logs/step1a2.log";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
-    int what_to_do = DIV;
-    if(argc>=2){
-        file_path = argv[1];
+    int what_to_do = DIV; 
+    if(argc>=2){         // ./compare {file name} {to do} {failureIndicator} {newLogIndicator}
+        file_path = argv[1];    
     } //"";
     if(argc>=3){
-        std::stringstream ss (argv[2]);
-        ss >> what_to_do;
-        std::cout << "to do: " << what_to_do << std::endl;
+        std::stringstream ss (argv[2]);         // 0: find divergence
+        ss >> what_to_do;                   // 1: print stack trace
+        std::cout << "to do: " << what_to_do << std::endl; // 2: find argument value
     }
     std::ifstream file1(file_path);
     std::cout << "file path: " << file_path << std::endl;
@@ -75,8 +39,8 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     }
 
     
-    std::string failureIndicator = "BlockManager$ReplicationMonitor";
-    std::string newLogIndicator = "Method Entry";
+    std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
+    std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
         failureIndicator = argv[3];
@@ -87,10 +51,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     }
     
     std::string line; 
-    // std::unordered_map<int, int> loopStarts; //= {{4, 0}, {1, 0}};
-    // std::unordered_map <int, int> loopIds = {{4, 1},{3, 1},{2, 1},{1, 2}, {0, 2}};
-    // std::unordered_map <int, int> loopStartIds = {{4, 1},{1, 2}}; std::unordered_map <int, int> parentLoop = {{1,-1}, {2,1}};
-    if(what_to_do == TRACE){
+    if(what_to_do == TRACE){    ////// TODO = 1 //// PRINT STACK TRACE ///////////////////////////
         std::cout << "______" << std::endl;
         std::cout << "stack trace of thread " << failureIndicator << ": " << std::endl;
         bool next = false; bool found = false;
@@ -103,7 +64,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
                 line = line.substr(20);
                 temp_id = line.find(failureIndicator);
                 if(temp_id != std::string::npos){
-                    found = true; failedtrace.fail = true;
+                    found = true; failedtrace.fail = true;  // found failed stack trace
                     temp_id = line.find("]");
                     if(temp_id != std::string::npos){
                         line = line.substr(0, temp_id);
@@ -128,14 +89,14 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         }else{
             failedtrace.print();
             if(failedtrace.lines.size()>2){
-                std::cout << "caller: " << std::endl;
+                std::cout << "caller: " << std::endl;   
                 std::cout << failedtrace.lines[2] << std::endl;
             }
         }
         
         return 0;
     }
-    else if(what_to_do == ARG){ ///////////////////// VARIABLE //////////////////////////////////
+    else if(what_to_do == ARG){ ///// TODO = 2 /////////// VARIABLE //////////////////////////////////
         std::cout << "searching for argument value " << arg_value << std::endl;
         bool found = false;
         std::string arg_value = ""; 
@@ -185,7 +146,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         return 0;
     }
     
-    std::vector<Log*> logs; //
+    std::vector<Log*> logs; // /////////// FIND DIVERGENCE //////////////////////////////////
     // std::cout << "HERE" << std::endl;
     std::unordered_map<int, Log*> threads;
     int num_fails = 0;
@@ -257,16 +218,11 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         return 1;
     }
     int k = 0;
-//    std::cout << "failed run: " << std::endl;
-//    fails[k]->printContexts();
-//    fails[k]->printContexMaps();
-//    std::cout << "good run: " << std::endl;
-//    succeeds[1]->printContexts();
-    // fails[k]->printLoops();
+//    DONE collecting the log, start comparing 
     std::cout << std::endl;
-    if(what_to_do == DIV){  ////////////////// DIVERGENCE //////////////////////////////////////////
+    if(what_to_do == DIV){ 
         std::cout << "comparing logs" << std::endl;
-        auto result = logCompare(fails[k], succeeds);
+        auto result = logCompare(fails[k], succeeds); //// COMPARE ////////////////
         int length = result.second.size();
         std::cout << "length: " << (length) << ". ";
         std::cout << "______" << std::endl;
@@ -300,10 +256,6 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
             std::cout << std::endl;
         }
     }
-//    fails[k]->printLoops();
-//    for(auto it : fails[k]->loopStartIds){
-//        std::cout << "{" << it.first << ", " << it.second << "} ";
-//    } std::cout << std::endl;
     return 0;
 }
 
@@ -330,3 +282,40 @@ L2 L3 L4 L3 L4 L5 L3 L4 L5 L3 L4 L5 L3 L4 L5 L6
 // diverge at L4
 */
 
+std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds){
+    std::vector<Event> prefix; // longest common prefix
+    if(succeeds.size()==0) {return std::make_pair(nullptr, prefix);}
+    int max_length = 0; // longest prefix length
+    int max_total = 0;
+    int max_idx = 0;
+
+    std::pair<Log*, std::vector<Event>> out;
+    
+    for(int i=0; i<succeeds.size(); i++){
+        // int length = compare_one_log(failed, succeeds[i]);
+        // std::cout << "comapring " << i << std::endl;
+        // auto result = compare_log_contexts(failed, succeeds[i]);
+        auto result = compare_log_maploops(failed, succeeds[i]);
+        int length = result.first;
+        if(length > max_length || (length == max_length && succeeds[i]->parsed.size() > max_total) ){
+            out.first = succeeds[i];
+            out.second = result.second;
+            max_length = length; // update max length
+            max_idx = i; // the run index in vector woth longest common prefix
+            max_total = succeeds[i]->parsed.size();
+        }
+    }
+    
+    // int i = 0; Log lon(succeed_str[max_idx]); 
+    // while(i<lon.current || !lon.parsedAll()){
+    //     Event* es = lon.getEvent(i);
+    //     if(es == nullptr){
+    //         break;
+    //     }else{        
+    //         longest.push_back(*es);
+    //     }
+    //     i++;
+    // }
+    return out; //std::make_pair(max_length, succeeds[max_idx]);
+} 
+ 

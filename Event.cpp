@@ -15,7 +15,7 @@ Event::Event(const int num, const Event::EventType t) : lineNum(num), type(t) {
     context = nullptr; idx = -1;
     loopId = -1; startLoopId = -2;
 }
-bool Event::operator== (const Event& rhs) const{
+bool Event::operator== (const Event& rhs) const{ // compare events across logs
     if(lineNum != rhs.lineNum || type != rhs.type ){ // not same line number
         return false;
     }
