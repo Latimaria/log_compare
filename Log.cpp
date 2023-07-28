@@ -63,7 +63,7 @@ Event* Log::parseNextLine() { // parse next line of log
             e->lineNum = id; 
         }
     }
-    // if is not a method entry; if there is ID= after [Methoid Entry], rewrites its ID 
+    // if is not a method entry; if there is ID= after [Method Entry], rewrites its ID 
     temp_id = line.find("ID="); // std::cout << "ID! " << std::endl;
     if(temp_id != std::string::npos){
         line = line.substr(temp_id+3);

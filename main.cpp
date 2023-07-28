@@ -20,9 +20,10 @@
 
 std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds);                                                                                                              
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
-    std::string file_path = "logs/step1a2.log";
+    std::string file_path = "logs/production_log_round1.txt";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
+    
     if(argc>=2){         // ./compare {file name} {to do} {failureIndicator} {newLogIndicator}
         file_path = argv[1];    
     } //"";
@@ -39,7 +40,8 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     }
 
     
-    std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
+    // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
+    std::string failureIndicator = "BlockManager$ReplicationMonitor"; 
     std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
@@ -146,77 +148,113 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         return 0;
     }
     
-    std::vector<Log*> logs; // /////////// FIND DIVERGENCE //////////////////////////////////
+    ////////////////////////////// TEMP
+    std::ofstream file2("logs/production_ID7.txt");
+    if (!file2.is_open()) {
+        std::cout << "Failed to open file" << std::endl;
+        return 1;
+    }
+    
+    std::vector<Log*> succeeds; // /////////// FIND DIVERGENCE //////////////////////////////////
+    std::vector<Log*> fails;
     // std::cout << "HERE" << std::endl;
-    std::unordered_map<int, Log*> threads;
-    int num_fails = 0;
+    std::unordered_map<std::string, Log*> threads; // newest log from that thread
+    // int num_fails = 0;
     int num_threads = 0; bool fail_encountered = false;
+    Log* log = nullptr;
+    
+    std::string prev_thread = "org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553";
     while(std::getline(file1, line)){
-        bool newLog = false; int thread = -1; bool fail = false;
-        std::cout << line << std::endl; 
+        bool newLog = false; std::string thread = ""; 
+        // std::cout << line << std::endl; 
         std::string::size_type temp_id = line.find("Stack Trace");
         if(temp_id != std::string::npos){ continue; } // stack trace, ignore
         temp_id = line.find("BM");
         if(temp_id == std::string::npos){ continue; } // no BM, is stack trace, ignore
-        temp_id = line.find("IPC Server handler ");
-        if(temp_id != std::string::npos){ // deal with thread
-            std::stringstream ss (line.substr(temp_id+19));
-            ss >> thread; // thread number
+        
+        line = line.substr(5); // get rid of [BM][
+        
+        temp_id = line.find("]");
+        if(temp_id != std::string::npos){ 
+            thread = line.substr(0, temp_id); // thread name
         }
-        else if(line.find(failureIndicator) != std::string::npos){ // failed run
-            if(!fail_encountered){ // fail log did not appear before
-                newLog = true; fail_encountered = true;
-            }
-            fail = true;
-            thread = -2;
-        }
+        
         if(threads.find(thread) == threads.end()){ // new thread
             // threads[thread] = num_threads; num_threads++;
             newLog = true;
+            std::cout << "new thread: " << thread << std::endl;
         }
+        
         temp_id = line.find(newLogIndicator);
         if(temp_id != std::string::npos){ // new Log
             newLog = true;
-            if(thread==-2) {num_fails++;}
+            // if(fail) {num_fails++;}
         }
         
-        Log* log = nullptr; 
         if(newLog){
+            if(log != nullptr){ // push back the previous log
+                if(log->fail){
+                    fails.push_back(log);
+                    file2 << "[BM][" << prev_thread << "]ID=7,\n"; ///////// TEMP
+                    prev_thread = thread;
+                }else{
+                    succeeds.push_back(log);
+                }
+            }
+            
             // std::cout << "new log! " << "fail: " << fail << std::endl;
             log = new Log();
+            log->fail = true; /////// TEMP
             // log->loopIds = loopIds; 
             // log->loopStartIds = loopStartIds; log->loopIds_count = loopStartIds.size() + 1; log->parentLoop = parentLoop;
             // log->init_contexts(loopStarts);
-            logs.push_back(log);
-            threads[thread] = log; // new current log for that thread
+            threads[thread] = log; // update current log for that thread
             num_threads++;
         }else{
-            log = threads[thread];
+            // log = threads[thread]; // current log of that thread
         }
+        
+        if(log==nullptr){
+            std::cout << "null" << std::endl;
+            continue;
+        }
+        
+        if(line.find(failureIndicator) != std::string::npos){ // failed run
+            // fail_encountered = true;
+            //log->fail = true;
+        }
+        
+        ///////////////////// TEMP
+        if(line.find("ID=6,0") != std::string::npos){
+            log->fail = false;
+        }
+        ////////////////////// TEMP
+        
         log->to_parse.push_back(line);
-        log->fail = fail;
+        file2 << "[BM][" << line << "\n"; /////////////////// TEMP
         // std::cout << line << ": thread # " << thread << " fail: " << fail << std::endl;
     }
-    // std::cout << "# logs " << logs.size() << std::endl;
-
-    std::vector<Log*> succeeds; std::vector<Log*> fails; 
-    for(Log* l : logs){
-        if(l==nullptr){
-            std::cout << "null" << std::endl;
-        }
-        else if(l->fail){
-            l->parseAll();
-            fails.push_back(l);
+    if(log != nullptr){ // push back the previous log
+        if(log->fail){
+            fails.push_back(log);
+            file2 << "[BM][" << prev_thread << "]ID=7,\n"; ///////// TEMP
         }else{
-            l->parseAll();
-            succeeds.push_back(l);
+            succeeds.push_back(log);
         }
     }
+    // std::cout << "# logs " << logs.size() << std::endl;
     
     if(fails.size()==0){
         std::cout << "did not find log for failure runs" << std::endl;
         return 1;
     }
+    
+    
+    std::cout << "# of fails: " << fails.size() << std::endl;
+    std::cout << "# of succs: " << succeeds.size() << std::endl;
+    file1.close(); file2.close(); return 0;
+    
+    
     int k = 0;
 //    DONE collecting the log, start comparing 
     std::cout << std::endl;
