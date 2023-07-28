@@ -20,7 +20,7 @@
 
 std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds);                                                                                                              
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
-    std::string file_path = "logs/production_log_round1.txt";
+    std::string file_path = "logs/production_ID7.txt";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
     
@@ -41,7 +41,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
 
     
     // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
-    std::string failureIndicator = "BlockManager$ReplicationMonitor"; 
+    std::string failureIndicator = "ID=7"; 
     std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
@@ -148,22 +148,15 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         return 0;
     }
     
-    ////////////////////////////// TEMP
-    std::ofstream file2("logs/production_ID7.txt");
-    if (!file2.is_open()) {
-        std::cout << "Failed to open file" << std::endl;
-        return 1;
-    }
-    
+
     std::vector<Log*> succeeds; // /////////// FIND DIVERGENCE //////////////////////////////////
     std::vector<Log*> fails;
     // std::cout << "HERE" << std::endl;
     std::unordered_map<std::string, Log*> threads; // newest log from that thread
     // int num_fails = 0;
-    int num_threads = 0; bool fail_encountered = false;
+    int num_threads = 0; 
     Log* log = nullptr;
     
-    std::string prev_thread = "org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553";
     while(std::getline(file1, line)){
         bool newLog = false; std::string thread = ""; 
         // std::cout << line << std::endl; 
@@ -182,7 +175,6 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         if(threads.find(thread) == threads.end()){ // new thread
             // threads[thread] = num_threads; num_threads++;
             newLog = true;
-            std::cout << "new thread: " << thread << std::endl;
         }
         
         temp_id = line.find(newLogIndicator);
@@ -195,8 +187,6 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
             if(log != nullptr){ // push back the previous log
                 if(log->fail){
                     fails.push_back(log);
-                    file2 << "[BM][" << prev_thread << "]ID=7,\n"; ///////// TEMP
-                    prev_thread = thread;
                 }else{
                     succeeds.push_back(log);
                 }
@@ -204,7 +194,6 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
             
             // std::cout << "new log! " << "fail: " << fail << std::endl;
             log = new Log();
-            log->fail = true; /////// TEMP
             // log->loopIds = loopIds; 
             // log->loopStartIds = loopStartIds; log->loopIds_count = loopStartIds.size() + 1; log->parentLoop = parentLoop;
             // log->init_contexts(loopStarts);
@@ -220,24 +209,15 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         }
         
         if(line.find(failureIndicator) != std::string::npos){ // failed run
-            // fail_encountered = true;
-            //log->fail = true;
+            log->fail = true;
         }
-        
-        ///////////////////// TEMP
-        if(line.find("ID=6,0") != std::string::npos){
-            log->fail = false;
-        }
-        ////////////////////// TEMP
         
         log->to_parse.push_back(line);
-        file2 << "[BM][" << line << "\n"; /////////////////// TEMP
         // std::cout << line << ": thread # " << thread << " fail: " << fail << std::endl;
     }
     if(log != nullptr){ // push back the previous log
         if(log->fail){
             fails.push_back(log);
-            file2 << "[BM][" << prev_thread << "]ID=7,\n"; ///////// TEMP
         }else{
             succeeds.push_back(log);
         }
@@ -252,25 +232,26 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     
     std::cout << "# of fails: " << fails.size() << std::endl;
     std::cout << "# of succs: " << succeeds.size() << std::endl;
-    file1.close(); file2.close(); return 0;
+    file1.close(); 
     
     
-    int k = 0;
+    int k = 416;
 //    DONE collecting the log, start comparing 
     std::cout << std::endl;
     if(what_to_do == DIV){ 
-        std::cout << "comparing logs" << std::endl;
+        std::cout << "comparing logs ///" << std::endl;
         auto result = logCompare(fails[k], succeeds); //// COMPARE ////////////////
         int length = result.second.size();
         std::cout << "length: " << (length) << ". ";
+        std::cout << "prefix: " << std::endl;
+        for(int i=0; i<result.second.size(); i++){
+            std::cout << result.second[i].idx << ":ID=" << result.second[i].lineNum << " ";
+        }
         std::cout << "______" << std::endl;
             
         if( length==fails[k]->parsed.size() && length==result.first->parsed.size() ){
-            std::cout << "prefix: " << std::endl;
-            for(int i=0; i<result.second.size(); i++){
-                std::cout << result.second[i].idx << ":ID=" << result.second[i].lineNum << " ";
-            }std::cout << std::endl << std::endl;
-              std::cout << "No divergence" << std::endl;
+            std::cout << std::endl << std::endl;
+            std::cout << "No divergence" << std::endl;
               
         }else{
 
