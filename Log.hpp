@@ -33,7 +33,7 @@ public:
 
     bool fail;
     // Initialize log with a string stream
-    Log() {}
+    Log() {fail = false;}
      // Copy constructor
     Log(const Log& other);
 

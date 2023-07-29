@@ -20,7 +20,7 @@
 
 std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds);                                                                                                              
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
-    std::string file_path = "logs/production_ID7.txt";
+    std::string file_path = "logs/step1a2.log";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
     
@@ -41,7 +41,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
 
     
     // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
-    std::string failureIndicator = "ID=7"; 
+    std::string failureIndicator = "BlockManager$ReplicationMonitor"; 
     std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
@@ -153,8 +153,6 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     std::vector<Log*> fails;
     // std::cout << "HERE" << std::endl;
     std::unordered_map<std::string, Log*> threads; // newest log from that thread
-    // int num_fails = 0;
-    int num_threads = 0; 
     Log* log = nullptr;
     
     while(std::getline(file1, line)){
@@ -198,7 +196,6 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
             // log->loopStartIds = loopStartIds; log->loopIds_count = loopStartIds.size() + 1; log->parentLoop = parentLoop;
             // log->init_contexts(loopStarts);
             threads[thread] = log; // update current log for that thread
-            num_threads++;
         }else{
             // log = threads[thread]; // current log of that thread
         }
@@ -235,7 +232,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     file1.close(); 
     
     
-    int k = 416;
+    int k = 0;
 //    DONE collecting the log, start comparing 
     std::cout << std::endl;
     if(what_to_do == DIV){ 
