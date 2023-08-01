@@ -2,11 +2,9 @@
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
-      <df name="logs">
-        <in>ID_to_continue</in>
-      </df>
       <in>Event.cpp</in>
       <in>Log.cpp</in>
+      <in>PrefixTree.cpp</in>
       <in>Trace.cpp</in>
       <in>main.cpp</in>
     </df>
@@ -55,11 +53,13 @@
         <ccTool flags="0">
         </ccTool>
       </item>
-      <item path="Trace.cpp" ex="false" tool="1" flavor2="8">
+      <item path="PrefixTree.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
         </ccTool>
       </item>
-      <item path="logs/ID_to_continue" ex="false" tool="3" flavor2="0">
+      <item path="Trace.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">

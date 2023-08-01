@@ -51,7 +51,7 @@ Event* Log::parseNextLine() { // parse next line of log
         entry = line;
         temp_id = line.find("(");
         e = new Event();
-        e->type = Event::EventType::Invocation;
+        e->type = EventType::Invocation;
         if(temp_id != std::string::npos){
             e->value = line.substr(0, temp_id);
             line = line.substr(temp_id+1);
@@ -90,11 +90,11 @@ Event* Log::parseNextLine() { // parse next line of log
             e->value = line;
             
             if(e->value=="true" || e->value=="false"){
-            e->type = Event::EventType::Condition;
+            e->type = EventType::Condition;
             }else if(is_number(e->value)){
-                e->type = Event::EventType::Location;
+                e->type = EventType::Location;
             }else{
-                e->type = Event::EventType::Output;
+                e->type = EventType::Output;
             }
         }
 

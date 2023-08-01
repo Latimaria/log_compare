@@ -10,12 +10,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/homes/s/shiellen/Documents/log_compare/python/byte.py</file>
-            <file>file:/homes/s/shiellen/Documents/log_compare/logs/step1a2.log</file>
+            <file>file:/homes/s/shiellen/Documents/log_compare/PrefixTree.cpp</file>
+            <file>file:/homes/s/shiellen/Documents/log_compare/Event.cpp</file>
             <file>file:/homes/s/shiellen/Documents/log_compare/logs/production_ID7.txt</file>
             <file>file:/homes/s/shiellen/Documents/log_compare/main.cpp</file>
+            <file>file:/homes/s/shiellen/Documents/log_compare/Event.hpp</file>
             <file>file:/homes/s/shiellen/Documents/log_compare/Log.cpp</file>
             <file>file:/homes/s/shiellen/Documents/log_compare/Log.hpp</file>
+            <file>file:/homes/s/shiellen/Documents/log_compare/PrefixTree.hpp</file>
         </group>
     </open-files>
 </project-private>

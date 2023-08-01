@@ -13,6 +13,7 @@
 #include "Log.hpp"
 #include "globals.hpp"
 #include "Trace.hpp"
+#include "PrefixTree.hpp"
 
 #define DIV 0
 #define TRACE 1
@@ -20,7 +21,8 @@
 
 Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds);                                                                                                           
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
-    std::string file_path = "logs/production_ID7.txt";
+    
+    std::string file_path = "logs/step1a2.log";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
     
@@ -41,7 +43,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
 
     
     // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
-    std::string failureIndicator = "ID=7"; 
+    std::string failureIndicator = "BlockManager$ReplicationMonitor"; 
     std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
@@ -231,7 +233,43 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     std::cout << "# of succs: " << succeeds.size() << std::endl;
     file1.close(); 
     
-
+    
+    Trie* fail = new Trie();
+    Trie* succeed = new Trie();
+    for(int i=0; i<fails.size(); i++){
+        fails[i]->parseAll();
+        fail->insertLog(fails[i], i);
+    }
+    for(int i=0; i<succeeds.size(); i++){
+        succeeds[i]->parseAll();
+        succeed->insertLog(succeeds[i], i);
+    }
+    std::cout << "inserted" << std::endl;
+    std::cout << "fail: " << std::endl;
+    fail->print_Trie(); std::cout << "/////" << std::endl;
+    std::cout << "succeed: " << std::endl;
+    succeed->print_Trie(); std::cout << "/////" << std::endl;
+    
+    TriePrefix result = compareTries(fail, succeed);
+    std::cout << "div: " << result.div << std::endl;
+    std::cout << "length: " << result.length << std::endl;
+    std::cout << "vec (size= " << result.prefix.size() << "): " << std::endl;
+    for(int i=0; i<result.prefix.size(); i++){
+        std::cout << "ID=" << result.prefix[i] << " ";
+    }
+    std::cout << std::endl;
+    if(result.div){
+        std::cout << "div at " << result.prefix.back();
+    }
+    else{
+        std::cout << "no divergence";
+    }
+    // return 0;
+    
+    
+    
+    
+    
 //    DONE collecting the log, start comparing 
     std::cout << std::endl;
     if(what_to_do == DIV){ 
@@ -315,7 +353,7 @@ Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds){
     std::cout << "k " << k << " length " << max_total << std::endl;
     max_total=0;
     for(int j=0; j<succeeds.size(); j++){
-        // int length = compare_one_log(failed, succeeds[i]);
+        // int length = compare_one_log(failed, succeeds[i]);  
         std::cout << "comparing " << j << std::endl;
         // auto result = compare_log_contexts(failed, succeeds[i]);
         auto result = compare_log_maploops(fails[k], succeeds[j]);

@@ -11,7 +11,7 @@ Event::Event(const int num) : lineNum(num) {
     context = nullptr; 
     loopId = -1; startLoopId = -2;
 }
-Event::Event(const int num, const Event::EventType t) : lineNum(num), type(t) {
+Event::Event(const int num, const EventType t) : lineNum(num), type(t) {
     context = nullptr; idx = -1;
     loopId = -1; startLoopId = -2;
 }

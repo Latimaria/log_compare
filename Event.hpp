@@ -13,15 +13,16 @@
 /**
  * is a line of code
  */
+enum class EventType { // type of event
+    undefined = 0,
+    Condition,
+    Location,
+    Output,
+    Invocation
+};
+    
 class Event{
 public:
-    enum class EventType { // type of event
-        undefined = 0,
-        Condition,
-        Location,
-        Output,
-        Invocation
-    };
 
     int lineNum; // line number
     int idx; // idx in log
@@ -33,7 +34,7 @@ public:
     // Constructors
     Event();
     Event(const int num);
-    Event(const int num, const Event::EventType t);
+    Event(const int num, const EventType t);
     // Event(const int num, EventType t);
     
     bool operator== (const Event& rhs) const;

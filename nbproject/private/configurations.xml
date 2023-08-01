@@ -11,7 +11,6 @@
           <df name="testwhole">
           </df>
         </df>
-        <in>ID_to_continue</in>
       </df>
       <df name="python">
         <df name="logs">
@@ -25,6 +24,8 @@
       <in>Event.hpp</in>
       <in>Log.cpp</in>
       <in>Log.hpp</in>
+      <in>PrefixTree.cpp</in>
+      <in>PrefixTree.hpp</in>
       <in>Trace.cpp</in>
       <in>Trace.hpp</in>
       <in>globals.hpp</in>
@@ -58,6 +59,7 @@
         </gdb_interceptlist>
         <gdb_options>
           <DebugOptions>
+            <option name="reverse_debugging" value="on"/>
           </DebugOptions>
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
