@@ -66,4 +66,10 @@ typedef struct node {
     Event* eventB;
     int depth;
 } Node;
+typedef struct return_prefix {
+    Log* failed;
+    bool div;
+    int length;
+    std::vector<Event> prefix;
+} Prefix;
 #endif // LOG_HPP

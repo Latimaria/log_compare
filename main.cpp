@@ -18,9 +18,9 @@
 #define TRACE 1
 #define ARG 2
 
-std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds);                                                                                                              
+Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds);                                                                                                           
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
-    std::string file_path = "logs/step1a2.log";
+    std::string file_path = "logs/production_ID7.txt";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
     
@@ -41,7 +41,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
 
     
     // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
-    std::string failureIndicator = "BlockManager$ReplicationMonitor"; 
+    std::string failureIndicator = "ID=7"; 
     std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
@@ -231,45 +231,42 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     std::cout << "# of succs: " << succeeds.size() << std::endl;
     file1.close(); 
     
-    
-    int k = 0;
+
 //    DONE collecting the log, start comparing 
     std::cout << std::endl;
     if(what_to_do == DIV){ 
         std::cout << "comparing logs ///" << std::endl;
-        auto result = logCompare(fails[k], succeeds); //// COMPARE ////////////////
-        int length = result.second.size();
+        auto result = logCompare(fails, succeeds); //// COMPARE ////////////////
+        int length = result.prefix.size();
         std::cout << "length: " << (length) << ". ";
         std::cout << "prefix: " << std::endl;
-        for(int i=0; i<result.second.size(); i++){
-            std::cout << result.second[i].idx << ":ID=" << result.second[i].lineNum << " ";
+        for(int i=0; i<result.prefix.size(); i++){
+            std::cout << result.prefix[i].idx << ":ID=" << result.prefix[i].lineNum << " ";
         }
         std::cout << "______" << std::endl;
             
-        if( length==fails[k]->parsed.size() && length==result.first->parsed.size() ){
-            std::cout << std::endl << std::endl;
-            std::cout << "No divergence" << std::endl;
-              
-        }else{
-
+        if( result.div ){
             std::cout << "Diverge at: " ; 
             if(length==0){ // div at the beginning
-                if(fails[k]->parsed.size()>1 && fails[k]->getEvent(0)->lineNum==-1){
+                if(result.failed->parsed.size()>1 && result.failed->getEvent(0)->lineNum==-1){
                   std::cout << "HERE" << std::endl;
-                  fails[k]->getEvent(1)->print();
+                  result.failed->getEvent(1)->print();
                 }else{
-                    fails[k]->getEvent(0)->print();
+                    result.failed->getEvent(0)->print();
                 }
             }else if(length==1){
-                if(fails[k]->parsed.size()>1 && result.second.back().lineNum==-1){ // the first one is entry
-                    fails[k]->getEvent(1)->print(); // print the first one after the entry
+                if(result.failed->parsed.size()>1 && result.prefix.back().lineNum==-1){ // the first one is entry
+                    result.failed->getEvent(1)->print(); // print the first one after the entry
                 }else{
-                    result.second.back().print();
+                    result.prefix.back().print();
                 }
             }else {
-                result.second.back().print();
+                result.prefix.back().print();
             }
             std::cout << std::endl;
+        }else{
+            std::cout << std::endl << std::endl;
+            std::cout << "No divergence" << std::endl;
         }
     }
     return 0;
@@ -298,40 +295,42 @@ L2 L3 L4 L3 L4 L5 L3 L4 L5 L3 L4 L5 L3 L4 L5 L6
 // diverge at L4
 */
 
-std::pair<Log*, std::vector<Event>> logCompare(Log* failed, std::vector<Log*> succeeds){
+
+Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds){
     std::vector<Event> prefix; // longest common prefix
-    if(succeeds.size()==0) {return std::make_pair(nullptr, prefix);}
+    
     int max_length = 0; // longest prefix length
     int max_total = 0;
-    int max_idx = 0;
+    int max_idx = 0; int k=0;
 
-    std::pair<Log*, std::vector<Event>> out;
-    
-    for(int i=0; i<succeeds.size(); i++){
+    Prefix out; out.length=0; out.failed=nullptr;
+    if(succeeds.size()==0) {return out;}
+    for(int i=0; i<fails.size(); i++){
+        fails[i]->parseAll();
+        if(fails[i]->parsed.size()>max_total){
+            max_total = fails[i]->parsed.size();
+            k = i;
+        }
+    }
+    std::cout << "k " << k << " length " << max_total << std::endl;
+    max_total=0;
+    for(int j=0; j<succeeds.size(); j++){
         // int length = compare_one_log(failed, succeeds[i]);
-        // std::cout << "comapring " << i << std::endl;
+        std::cout << "comparing " << j << std::endl;
         // auto result = compare_log_contexts(failed, succeeds[i]);
-        auto result = compare_log_maploops(failed, succeeds[i]);
+        auto result = compare_log_maploops(fails[k], succeeds[j]);
         int length = result.first;
-        if(length > max_length || (length == max_length && succeeds[i]->parsed.size() > max_total) ){
-            out.first = succeeds[i];
-            out.second = result.second;
+        if(length > max_length || (length == max_length && fails[k]->parsed.size() > max_total) ){
+            out.failed = fails[k];
+            out.prefix = result.second;
+            out.length = length;
+            out.div = (length!=fails[k]->parsed.size() || length!=succeeds[j]->parsed.size());
             max_length = length; // update max length
-            max_idx = i; // the run index in vector woth longest common prefix
-            max_total = succeeds[i]->parsed.size();
+            max_idx = j; // the run index in vector woth longest common prefix
+            max_total = fails[k]->parsed.size();
         }
     }
     
-    // int i = 0; Log lon(succeed_str[max_idx]); 
-    // while(i<lon.current || !lon.parsedAll()){
-    //     Event* es = lon.getEvent(i);
-    //     if(es == nullptr){
-    //         break;
-    //     }else{        
-    //         longest.push_back(*es);
-    //     }
-    //     i++;
-    // }
     return out; //std::make_pair(max_length, succeeds[max_idx]);
 } 
  
