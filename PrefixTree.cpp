@@ -52,6 +52,7 @@ bool Trie::insertLog(Log* log, int idx) {
         std::cout << "null root" << std::endl;
     }
     
+    bool start_loop = false;
     for (int i = 1; i < log->parsed.size(); i++) {
         int lineNum = -1;
         Event* e = log->getEvent(i);
@@ -63,11 +64,18 @@ bool Trie::insertLog(Log* log, int idx) {
             lineNum = e->lineNum;
         }
         
+        if(e->loopId>-1 && )
         if (current->children.find(lineNum) == current->children.end()){
             current->children[lineNum] = new TrieNode(lineNum);
         }
         
         current = current->children[lineNum];
+        
+        if(loopStartIds.find(lineNum) != loopStartIds.end()){
+            start_loop = true;
+        }else{
+            start_loop = false;
+        }
     }
 
     current->isEndOfLog = true;
