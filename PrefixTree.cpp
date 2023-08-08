@@ -46,30 +46,77 @@ bool Trie::insertLog(Log* log, int idx) {
     }
     loopStartIds.insert(log->loopStartIds.begin(), log->loopStartIds.end());
     parentLoop.insert(log->parentLoop.begin(), log->parentLoop.end());
+    std::unordered_map<int, TrieNode*> loopStartNodes; // loop id -> start Node *
+    std::multimap<int, TrieNode*> loopTails;
     
-    TrieNode *current = root;
+    TrieNode *current = root; // parent of the node being added
     if(current==nullptr){
         std::cout << "null root" << std::endl;
     }
     
-    bool start_loop = false;
+    int looping = -1;
+    
     for (int i = 1; i < log->parsed.size(); i++) {
-        int lineNum = -1;
+        
+        int lineNum = -1; int loopId = -1;
         Event* e = log->getEvent(i);
         if(e==nullptr){
             std::cout << "null Event in log, idx: " << i << std::endl;
             current->isEndOfLog = true;
             return false;
         }else{
-            lineNum = e->lineNum;
+            lineNum = e->lineNum; loopId = e->loopId;
         }
         
-        if(e->loopId>-1 && )
-        if (current->children.find(lineNum) == current->children.end()){
-            current->children[lineNum] = new TrieNode(lineNum);
+        std::cout << std::endl << i << " current: " << current->lineNum << " e: " << lineNum << std::endl;
+                
+        bool start_loop = (loopId>-1 && loopStartIds.find(lineNum)!=loopStartIds.end()); // node being added is start of loop
+        bool new_node = (current->children.find(lineNum) == current->children.end());
+        
+        TrieNode* next = nullptr;
+
+        if(start_loop){
+            std::cout << "start_loop: " << loopId << std::endl;
+            looping = loopId;
+            if(!new_node){ // this shouldn't happen, if it's loop start it should be a new node
+                std::cout << "start & new; " << lineNum << " loopId: " << loopId << std::endl;
+            }
+            if(loopStartNodes.find(loopId)==loopStartNodes.end()){ // first loop start added to Trie
+                std::cout << "loop start added: " << lineNum << " loopId: " << loopId << std::endl;
+                next = new TrieNode(lineNum); next->loopId = loopId;
+                current->children[lineNum] = next; // current is node before the Trie
+                loopStartNodes[loopId] = next; 
+
+            }else{ // start node already added to Trie
+                if(current->loopId == loopId){ // this should be true
+                    loopTails.insert({loopId, current});
+                    std::cout << "Tail added: " << current->lineNum << " loopId: " << loopId << std::endl;
+                }else{
+                    std::cout << "start added but not same loop " << lineNum << " loopId: " << loopId << std::endl;
+                }
+                current = loopStartNodes[loopId];
+                continue;
+            }
+        }
+        else{ // not start of index
+            if(new_node){
+                next = new TrieNode(lineNum); next->loopId = loopId;
+                current->children[lineNum] = next;
+            }else{
+                next = current->children[lineNum];
+            }
+            
+            if(loopId!=looping){ // loop Id of next != current but is not start of loop
+                auto bound = loopTails.upper_bound(looping);
+                for(auto it=loopTails.lower_bound(looping); it!=bound; it++){
+                    it->second->children[lineNum] = next;
+                }
+                looping = loopId;
+            }
         }
         
-        current = current->children[lineNum];
+        
+        current = next;
         
         if(loopStartIds.find(lineNum) != loopStartIds.end()){
             start_loop = true;

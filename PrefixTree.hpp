@@ -22,17 +22,17 @@ class TrieNode {
 public:
     std::unordered_map<int, TrieNode*> children; // lineNum (ID) to child
     bool isEndOfLog; int endLogIdx;
-    int lineNum;
+    int lineNum; int loopId;
     
     TrieNode() {
         isEndOfLog = false; endLogIdx=-1;
-        lineNum = -1;
+        lineNum = -1; loopId = -1;
         std::unordered_map<int, TrieNode*> temp; children = temp;
         
     }
     TrieNode(int ID) {
         isEndOfLog = false; endLogIdx=-1;
-        lineNum = ID;
+        lineNum = ID; loopId = -1;
         std::unordered_map<int, TrieNode*> temp; children = temp;
     }
     

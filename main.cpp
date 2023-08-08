@@ -22,7 +22,8 @@
 Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds);                                                                                                           
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
     
-    std::string file_path = "logs/step1a2.log";
+     std::string file_path = "logs/step1a2.log";
+    // std::string file_path = "logs/production_ID7.txt";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
     
@@ -42,8 +43,8 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     }
 
     
-    // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
-    std::string failureIndicator = "BlockManager$ReplicationMonitor"; 
+     std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
+    // std::string failureIndicator = "ID=7"; 
     std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
@@ -233,6 +234,21 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     std::cout << "# of succs: " << succeeds.size() << std::endl;
     file1.close(); 
     
+    std::cout << "here" << std::endl;
+    fails[0]->parseAll();
+    for (int i = 1; i < fails[0]->parsed.size(); i++) {
+        int lineNum = -1; int loopId = -1;
+        Event* e = fails[0]->getEvent(i);
+        if(e==nullptr){
+            std::cout << "null Event in log, idx: " << i << std::endl;
+            continue;
+        }else{
+            lineNum = e->lineNum; loopId = e->loopId;
+        }
+        std::cout << " lineNum: " << lineNum << std::endl;
+    }
+   
+    std::cout << "/////////////////////////" << std::endl;
     
     Trie* fail = new Trie();
     Trie* succeed = new Trie();
@@ -240,11 +256,12 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         fails[i]->parseAll();
         fail->insertLog(fails[i], i);
     }
+    std::cout << "/////////////////////////" << std::endl;
     for(int i=0; i<succeeds.size(); i++){
         succeeds[i]->parseAll();
         succeed->insertLog(succeeds[i], i);
     }
-    std::cout << "inserted" << std::endl;
+    std::cout << "inserted " << std::endl;
     std::cout << "fail: " << std::endl;
     fail->print_Trie(); std::cout << "/////" << std::endl;
     std::cout << "succeed: " << std::endl;
@@ -264,7 +281,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     else{
         std::cout << "no divergence";
     }
-    // return 0;
+    return 0;
     
     
     
