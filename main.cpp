@@ -22,8 +22,8 @@
 Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds);                                                                                                           
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
     
-     std::string file_path = "logs/step1a2.log";
-    // std::string file_path = "logs/production_ID7.txt";
+    // std::string file_path = "logs/step1a2.log";
+     std::string file_path = "logs/ID7_loop2.txt";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
     
@@ -43,8 +43,8 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     }
 
     
-     std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
-    // std::string failureIndicator = "ID=7"; 
+    // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
+     std::string failureIndicator = "ID=7"; 
     std::string newLogIndicator = "Method Entry";   // start new log
     std::string arg_value = "-1";
     if(argc>=4){
@@ -281,6 +281,12 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     else{
         std::cout << "no divergence";
     }
+
+    Log* test = succeeds[30];
+    std::cout << std::endl << "test: " << std::endl;
+    test->printAll();
+    std::cout << std::endl << "loops" << std::endl;
+    test->printLoopMaps();
     return 0;
     
     

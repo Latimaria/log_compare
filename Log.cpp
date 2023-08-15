@@ -327,7 +327,13 @@ void Log::printLoops(){
        std::cout << " loop id: " << parsed[i]->loopId;
        std::cout << ", " ;
     }
-    std::cout << std::endl;
+    std::cout << std::endl;   
+}
+void Log::printLoopMaps(){
+    std::cout << "loopStartIds:" << std::endl;
+    for(auto it : loopStartIds){
+        std::cout << "ID " << it.first << ": loop Id " << it.second << std::endl;
+    }
 }
 
 std::pair<int, std::vector<Event*>> bfs_start(Log* A, Log* B){ 
