@@ -13,6 +13,49 @@ void Trace::print(){
     }
 }
 
+Caller Trace::find_caller(std::string function_name){
+    std::string::size_type temp_id;
+    Caller result;
+    int i = 0;
+    for(; i<lines.size(); i++){
+        temp_id = lines[i].find(function_name);
+        if(temp_id != std::string::npos){
+            i++;
+            break;
+        }
+    }
+    for(; i<lines.size(); i++){
+        std::string line = lines[i];
+        temp_id = line.find("(");
+        if(temp_id == std::string::npos){
+            continue;
+        }else{
+            std::string name = line.substr(0, temp_id);
+            std::string call = line.substr(temp_id+1);
+            temp_id = name.rfind(".");
+            if (temp_id != std::string::npos && temp_id != name.length()-1) {
+                name = name.substr(temp_id + 1);
+            }
+            result.function_name = name;
+
+            temp_id = call.find(":");
+            if (temp_id != std::string::npos) {
+                call = call.substr(temp_id+1);
+            }
+            temp_id = call.find(")");
+            if (temp_id != std::string::npos) {
+                call = call.substr(0,temp_id);
+            }
+            std::stringstream ss(call);
+            int lineNum = -1; ss >> lineNum;
+            result.line_number = lineNum;
+            result.valid = true;
+            return result;
+        }
+    }
+    return result;
+}
+
 std::string compare_trace(Trace* t1, Trace* t2){
     int size1 = t1->lines.size();
     int size2 = t2->lines.size();
@@ -32,3 +75,4 @@ std::string compare_trace(Trace* t1, Trace* t2){
         return t1->lines[0];
     }
 }
+

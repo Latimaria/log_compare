@@ -15,6 +15,16 @@
 #include <stack>
 #include <queue>
 
+class Caller{
+    public:
+    std::string function_name;
+    int line_number;
+    bool valid;
+    Caller(){
+        line_number = -1;
+        valid = false;
+    }
+};
 class Trace {
 public:
     std::vector<std::string> lines;
@@ -27,6 +37,7 @@ public:
     ~Trace();
 
     void print();
+    Caller find_caller(std::string function_name);
 };
 
 std::string compare_trace(Trace* t1, Trace* t2);

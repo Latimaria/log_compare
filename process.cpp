@@ -177,7 +177,7 @@ bool process_trace(std::string file_path, std::string out_path, std::string succ
             newTrace = true; num_logs++;
             if(threads_succeed.find(thread)!=threads_succeed.end()){
                 if(threads_succeed[thread] == false){
-                    file2 << "[BM][" << thread << "]ID=" << fail_id << "\n";
+                    file2 << "[BM][" << thread << "]ID=" << fail_id << ",\n";
                     num_fails ++;
                 }
                 threads_succeed.erase(thread);
@@ -217,7 +217,7 @@ bool process_trace(std::string file_path, std::string out_path, std::string succ
     }
     for(auto it : threads_succeed){
         if(it.second == false){
-            file2 << "[BM][" << it.first << "]ID=" << fail_id << "\n";
+            file2 << "[BM][" << it.first << "]ID=" << fail_id << ",\n";
             num_fails++;
         }
     }

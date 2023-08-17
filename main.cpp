@@ -47,59 +47,97 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     std::string failureIndicator = "ID=99"; 
     int failure_id = 99;
     std::string newLogIndicator = "Method Entry";   // start new log
-    std::string arg_value = "-1";
+    std::string arg_value = "-1"; std::string caller_for = "";
     if(argc>=4){
         failureIndicator = argv[3];
         std::cout << "Indicator: " << failureIndicator << std::endl;
     } //"";
     if(argc>=5){
         newLogIndicator = argv[4];
+        if(what_to_do==TRACE){
+            caller_for = argv[4];
+        }
     }
     
     std::string line; 
     if(what_to_do == TRACE){    ////// TODO = 1 //// PRINT STACK TRACE ///////////////////////////
         std::cout << "______" << std::endl;
-        std::cout << "stack trace of thread " << failureIndicator << ": " << std::endl;
+        std::cout << "use stack trace" << std::endl;
+        std::cout << "failureIndicator " << failureIndicator << std::endl;
+        std::string traceStartIndicator = "Start Stack Trace";   // start new log
+        std::string traceEndIndicator = "End Stack Trace"; 
+
         bool next = false; bool found = false;
         std::string::size_type temp_id;
         
-        Trace failedtrace = Trace();
+        std::vector<Trace*> failed_traces;
+        std::unordered_map<std::string, Trace*> thread_traces;
+        Trace* current_trace;
+        bool tracing = false;
         while(std::getline(file1, line)){
-            temp_id = line.find("Start Stack Trace");
+            temp_id = line.find(traceStartIndicator);
             if(temp_id != std::string::npos){
-                line = line.substr(20);
-                temp_id = line.find(failureIndicator);
+                std::string thread = line.substr(temp_id+traceStartIndicator.length()+2);
+                temp_id = thread.find("]");
                 if(temp_id != std::string::npos){
-                    found = true; failedtrace.fail = true;  // found failed stack trace
-                    temp_id = line.find("]");
-                    if(temp_id != std::string::npos){
-                        line = line.substr(0, temp_id);
-                        failedtrace.thread = line;
+                    thread = thread.substr(0, temp_id);
+                }
+                current_trace = new Trace(thread); current_trace->fail = false;
+                thread_traces[thread] = current_trace;
+                tracing = true;
+                continue;
+            }
+
+            temp_id = line.find(traceEndIndicator);
+            if(temp_id != std::string::npos){
+                std::string thread = line.substr(temp_id+traceEndIndicator.length()+2);
+                temp_id = thread.find("]");
+                if(temp_id != std::string::npos){
+                    thread = thread.substr(0, temp_id);
+                }
+                tracing = false;
+            }
+
+            temp_id = line.find(failureIndicator); // "ID=99"
+            if(temp_id != std::string::npos){
+                std::string thread = line.substr(5);
+                temp_id = thread.find("]");
+                if(temp_id != std::string::npos){
+                    thread = thread.substr(0, temp_id);
+                }
+                if(thread_traces.find(thread)!=thread_traces.end()){
+                    if(thread_traces[thread]->fail==false){
+                        thread_traces[thread]->fail = true;
+                        failed_traces.push_back(thread_traces[thread]);
                     }
                 }
             }
-            if(found){
-                temp_id = line.find("Stack trace for thread ");
-                if(temp_id != std::string::npos){
-                    continue;
-                }
-                temp_id = line.find("End Stack Trace");
-                if(temp_id != std::string::npos){
-                    break;
-                }
-                failedtrace.lines.push_back(line);
+
+            if(tracing){
+                current_trace->lines.push_back(line);
             }
         }
-        if(!found){
+        std::cout << "# failed: " << failed_traces.size() << std::endl;
+        if(failed_traces.size()==0){
             std::cout << "Did not find stack trace of " << failureIndicator << std::endl;
-        }else{
-            failedtrace.print();
-            if(failedtrace.lines.size()>2){
-                std::cout << "caller: " << std::endl;   
-                std::cout << failedtrace.lines[2] << std::endl;
-            }
+            return 1;
         }
         
+        for(int i=0; i<failed_traces.size(); i++){
+            std::cout << "trace " << i << std::endl ;
+            failed_traces[i]->print();
+            std::cout << std::endl;
+        }
+        for(int i=0; i<failed_traces.size(); i++){
+            std::cout << "trace " << i << std::endl ;
+            Caller caller = failed_traces[i]->find_caller(caller_for);
+            if(caller.valid){
+                std::cout << "caller of " << caller_for << ": " << std::endl;
+                std::cout << caller.function_name << ", line: " << caller.line_number << std::endl;
+            }else{
+                std::cout << "did not find caller of " << caller_for << std::endl;
+            }
+        }
         return 0;
     }
     else if(what_to_do == ARG){ ///// TODO = 2 /////////// VARIABLE //////////////////////////////////
