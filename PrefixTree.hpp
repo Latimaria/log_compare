@@ -59,6 +59,8 @@ public:
     TrieNode* root; // which should be the entry
     std::unordered_map<int, int> loopStartIds; // loop Id to lineNum ID
     std::unordered_map <int, int> parentLoop; // loop Id to loop Id
+
+    std::unordered_map<int, TrieNode*> loopStartNodes;
     // std::unordered_set<int> ids_seen;
 
     // Initialize 

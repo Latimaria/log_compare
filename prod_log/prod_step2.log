@@ -1,0 +1,261 @@
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][IPC Server handler 26 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 26 on 9000]ID=0,loop=0
+[BM][IPC Server handler 26 on 9000]ID=2,0
+[BM][IPC Server handler 26 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 26 on 9000]ID=0,loop=0
+[BM][IPC Server handler 26 on 9000]ID=2,0
+[BM][IPC Server handler 26 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 26 on 9000]ID=0,loop=0
+[BM][IPC Server handler 26 on 9000]ID=2,0
+[BM][IPC Server handler 8 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 8 on 9000]ID=0,loop=0
+[BM][IPC Server handler 8 on 9000]ID=2,0
+[BM][IPC Server handler 8 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 8 on 9000]ID=0,loop=0
+[BM][IPC Server handler 8 on 9000]ID=2,0
+[BM][IPC Server handler 8 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 8 on 9000]ID=0,loop=0
+[BM][IPC Server handler 8 on 9000]ID=2,0
+[BM][IPC Server handler 35 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 35 on 9000]ID=0,loop=0
+[BM][IPC Server handler 35 on 9000]ID=2,0
+[BM][IPC Server handler 35 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 35 on 9000]ID=0,loop=0
+[BM][IPC Server handler 35 on 9000]ID=2,0
+[BM][IPC Server handler 35 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 35 on 9000]ID=0,loop=0
+[BM][IPC Server handler 35 on 9000]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][IPC Server handler 53 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 53 on 9000]ID=0,loop=0
+[BM][IPC Server handler 53 on 9000]ID=2,0
+[BM][IPC Server handler 53 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 53 on 9000]ID=0,loop=0
+[BM][IPC Server handler 53 on 9000]ID=2,0
+[BM][IPC Server handler 53 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 53 on 9000]ID=0,loop=0
+[BM][IPC Server handler 53 on 9000]ID=2,0
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=0,loop=0
+[BM][IPC Server handler 57 on 9000]ID=2,0
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=0,loop=0
+[BM][IPC Server handler 57 on 9000]ID=2,0
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=0,loop=0
+[BM][IPC Server handler 57 on 9000]ID=2,0
+[BM][IPC Server handler 39 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 39 on 9000]ID=0,loop=0
+[BM][IPC Server handler 39 on 9000]ID=2,0
+[BM][IPC Server handler 39 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 39 on 9000]ID=0,loop=0
+[BM][IPC Server handler 39 on 9000]ID=2,0
+[BM][IPC Server handler 39 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 39 on 9000]ID=0,loop=0
+[BM][IPC Server handler 39 on 9000]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][IPC Server handler 11 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 11 on 9000]ID=0,loop=0
+[BM][IPC Server handler 11 on 9000]ID=2,0
+[BM][IPC Server handler 11 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 11 on 9000]ID=0,loop=0
+[BM][IPC Server handler 11 on 9000]ID=2,0
+[BM][IPC Server handler 11 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 11 on 9000]ID=0,loop=0
+[BM][IPC Server handler 11 on 9000]ID=2,0
+[BM][IPC Server handler 59 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 59 on 9000]ID=0,loop=0
+[BM][IPC Server handler 59 on 9000]ID=2,0
+[BM][IPC Server handler 59 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 59 on 9000]ID=0,loop=0
+[BM][IPC Server handler 59 on 9000]ID=2,0
+[BM][IPC Server handler 59 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 59 on 9000]ID=0,loop=0
+[BM][IPC Server handler 59 on 9000]ID=2,0
+[BM][IPC Server handler 45 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 45 on 9000]ID=0,loop=0
+[BM][IPC Server handler 45 on 9000]ID=2,0
+[BM][IPC Server handler 45 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 45 on 9000]ID=0,loop=0
+[BM][IPC Server handler 45 on 9000]ID=2,0
+[BM][IPC Server handler 45 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 45 on 9000]ID=0,loop=0
+[BM][IPC Server handler 45 on 9000]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][IPC Server handler 18 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 18 on 9000]ID=0,loop=0
+[BM][IPC Server handler 18 on 9000]ID=2,0
+[BM][IPC Server handler 18 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 18 on 9000]ID=0,loop=0
+[BM][IPC Server handler 18 on 9000]ID=2,0
+[BM][IPC Server handler 18 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 18 on 9000]ID=0,loop=0
+[BM][IPC Server handler 18 on 9000]ID=2,0
+[BM][IPC Server handler 30 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 30 on 9000]ID=0,loop=0
+[BM][IPC Server handler 30 on 9000]ID=2,0
+[BM][IPC Server handler 30 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 30 on 9000]ID=0,loop=0
+[BM][IPC Server handler 30 on 9000]ID=2,0
+[BM][IPC Server handler 30 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 30 on 9000]ID=0,loop=0
+[BM][IPC Server handler 30 on 9000]ID=2,0
+[BM][IPC Server handler 41 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 41 on 9000]ID=0,loop=0
+[BM][IPC Server handler 41 on 9000]ID=2,0
+[BM][IPC Server handler 41 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 41 on 9000]ID=0,loop=0
+[BM][IPC Server handler 41 on 9000]ID=2,0
+[BM][IPC Server handler 41 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 41 on 9000]ID=0,loop=0
+[BM][IPC Server handler 41 on 9000]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][IPC Server handler 69 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 69 on 9000]ID=0,loop=0
+[BM][IPC Server handler 69 on 9000]ID=2,0
+[BM][IPC Server handler 69 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 69 on 9000]ID=0,loop=0
+[BM][IPC Server handler 69 on 9000]ID=2,0
+[BM][IPC Server handler 69 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 69 on 9000]ID=0,loop=0
+[BM][IPC Server handler 69 on 9000]ID=2,0
+[BM][IPC Server handler 67 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 67 on 9000]ID=0,loop=0
+[BM][IPC Server handler 67 on 9000]ID=2,0
+[BM][IPC Server handler 67 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 67 on 9000]ID=0,loop=0
+[BM][IPC Server handler 67 on 9000]ID=2,0
+[BM][IPC Server handler 67 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 67 on 9000]ID=0,loop=0
+[BM][IPC Server handler 67 on 9000]ID=2,0
+[BM][IPC Server handler 88 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 88 on 9000]ID=0,loop=0
+[BM][IPC Server handler 88 on 9000]ID=2,0
+[BM][IPC Server handler 88 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 88 on 9000]ID=0,loop=0
+[BM][IPC Server handler 88 on 9000]ID=2,0
+[BM][IPC Server handler 88 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 88 on 9000]ID=0,loop=0
+[BM][IPC Server handler 88 on 9000]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][IPC Server handler 61 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 61 on 9000]ID=0,loop=0
+[BM][IPC Server handler 61 on 9000]ID=2,0
+[BM][IPC Server handler 61 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 61 on 9000]ID=0,loop=0
+[BM][IPC Server handler 61 on 9000]ID=2,0
+[BM][IPC Server handler 61 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 61 on 9000]ID=0,loop=0
+[BM][IPC Server handler 61 on 9000]ID=2,0
+[BM][IPC Server handler 95 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 95 on 9000]ID=0,loop=0
+[BM][IPC Server handler 95 on 9000]ID=2,0
+[BM][IPC Server handler 95 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 95 on 9000]ID=0,loop=0
+[BM][IPC Server handler 95 on 9000]ID=2,0
+[BM][IPC Server handler 95 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 95 on 9000]ID=0,loop=0
+[BM][IPC Server handler 95 on 9000]ID=2,0
+[BM][IPC Server handler 93 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 93 on 9000]ID=0,loop=0
+[BM][IPC Server handler 93 on 9000]ID=2,0
+[BM][IPC Server handler 93 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 93 on 9000]ID=0,loop=0
+[BM][IPC Server handler 93 on 9000]ID=2,0
+[BM][IPC Server handler 93 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 93 on 9000]ID=0,loop=0
+[BM][IPC Server handler 93 on 9000]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][IPC Server handler 70 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 70 on 9000]ID=0,loop=0
+[BM][IPC Server handler 70 on 9000]ID=2,0
+[BM][IPC Server handler 70 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 70 on 9000]ID=0,loop=0
+[BM][IPC Server handler 70 on 9000]ID=2,0
+[BM][IPC Server handler 70 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 70 on 9000]ID=0,loop=0
+[BM][IPC Server handler 70 on 9000]ID=2,0
+[BM][IPC Server handler 4 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 4 on 9000]ID=0,loop=0
+[BM][IPC Server handler 4 on 9000]ID=2,0
+[BM][IPC Server handler 4 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 4 on 9000]ID=0,loop=0
+[BM][IPC Server handler 4 on 9000]ID=2,0
+[BM][IPC Server handler 4 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 4 on 9000]ID=0,loop=0
+[BM][IPC Server handler 4 on 9000]ID=2,0
+[BM][IPC Server handler 58 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 58 on 9000]ID=0,loop=0
+[BM][IPC Server handler 58 on 9000]ID=2,0
+[BM][IPC Server handler 58 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 58 on 9000]ID=0,loop=0
+[BM][IPC Server handler 58 on 9000]ID=2,0
+[BM][IPC Server handler 58 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 58 on 9000]ID=0,loop=0
+[BM][IPC Server handler 58 on 9000]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.addIfIsGoodTarget(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=0,loop=0
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=2,0

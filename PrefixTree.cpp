@@ -9,9 +9,11 @@ bool TrieNode::operator!= (const TrieNode& rhs) const{
     
 Trie::Trie(){
     root = nullptr;
+    // std::unordered_map<int, TrieNode*> temp; loopStartNodes  = temp;
 }
 Trie::Trie(std::string name) : entry(name){
     root = nullptr;
+    // std::unordered_map<int, TrieNode*> temp; loopStartNodes  = temp;
 }
 Trie::~Trie(){
 }
@@ -36,6 +38,7 @@ void Trie::print_subTrie(TrieNode* node){
     }
 }
 bool Trie::insertLog(Log* log, int idx) {
+    std::cout << "HERE" << std::endl;
     if(log==nullptr || log->parsed.size()==0 || log->parsed[0]==nullptr){
         return false;
     }
@@ -44,20 +47,21 @@ bool Trie::insertLog(Log* log, int idx) {
         entry = log->entry;
         std::cout << "entry: " << entry << std::endl;
     }
+    
     loopStartIds.insert(log->loopStartIds.begin(), log->loopStartIds.end());
     parentLoop.insert(log->parentLoop.begin(), log->parentLoop.end());
-    std::unordered_map<int, TrieNode*> loopStartNodes; // loop id -> start Node *
     std::multimap<int, TrieNode*> loopTails;
-    
+
     TrieNode *current = root; // parent of the node being added
     if(current==nullptr){
         std::cout << "null root" << std::endl;
     }
     
     int looping = -1;
-    
+
+    //std::cout << "THERE" << std::endl;
     for (int i = 1; i < log->parsed.size(); i++) {
-        
+        std::cout << std::endl << "start " << i << std::endl;
         int lineNum = -1; int loopId = -1;
         Event* e = log->getEvent(i);
         if(e==nullptr){
@@ -68,8 +72,12 @@ bool Trie::insertLog(Log* log, int idx) {
             lineNum = e->lineNum; loopId = e->loopId;
         }
         
-        std::cout << std::endl << i << " current: " << current->lineNum << " e: " << lineNum << std::endl;
-                
+        if(current==nullptr){
+            std::cout << "current is null" << std::endl;
+        }
+        std::cout << std::endl << i << " current: " << current->lineNum << " \"lineNum\": " << lineNum << std::endl;
+        print_Trie();
+
         bool start_loop = (loopId>-1 && loopStartIds.find(lineNum)!=loopStartIds.end()); // node being added is start of loop
         bool new_node = (current->children.find(lineNum) == current->children.end());
         
@@ -78,24 +86,31 @@ bool Trie::insertLog(Log* log, int idx) {
         if(start_loop){
             std::cout << "start_loop: " << loopId << std::endl;
             looping = loopId;
-            if(!new_node){ // this shouldn't happen, if it's loop start it should be a new node
-                std::cout << "start & new; " << lineNum << " loopId: " << loopId << std::endl;
-            }
-            if(loopStartNodes.find(loopId)==loopStartNodes.end()){ // first loop start added to Trie
-                std::cout << "loop start added: " << lineNum << " loopId: " << loopId << std::endl;
-                next = new TrieNode(lineNum); next->loopId = loopId;
-                current->children[lineNum] = next; // current is node before the Trie
-                loopStartNodes[loopId] = next; 
+            if(new_node){
+                if(loopStartNodes.find(loopId)==loopStartNodes.end()){ // first loop start added to Trie
+                    std::cout << "loop start added: " << lineNum << " loopId: " << loopId << std::endl;
+                    next = new TrieNode(lineNum); next->loopId = loopId;
+                    current->children[lineNum] = next; // current is node before the Trie
+                    loopStartNodes[loopId] = next; 
 
-            }else{ // start node already added to Trie
-                if(current->loopId == loopId){ // this should be true
-                    loopTails.insert({loopId, current});
-                    std::cout << "Tail added: " << current->lineNum << " loopId: " << loopId << std::endl;
-                }else{
-                    std::cout << "start added but not same loop " << lineNum << " loopId: " << loopId << std::endl;
+                }else{ // start node already added to Trie
+                    if(current->loopId == loopId){ // this should be true
+                        loopTails.insert({loopId, current});
+                        std::cout << "Tail added: " << current->lineNum << " loopId: " << loopId << std::endl;
+                    }else{
+                        std::cout << "start added but not same loop " << lineNum << " loopId: " << loopId << std::endl;
+                    }
+                    // current = loopStartNodes[loopId];
+                    // continue;
+                    next = loopStartNodes[loopId];
                 }
-                current = loopStartNodes[loopId];
-                continue;
+            }
+            else{ // not new Node
+                std::cout << "start & not new; " << lineNum << " loopId: " << loopId << std::endl;
+                
+                // current = loopStartNodes[loopId];
+                // continue;
+                next = loopStartNodes[loopId];
             }
         }
         else{ // not start of index
@@ -118,14 +133,16 @@ bool Trie::insertLog(Log* log, int idx) {
         
         current = next;
         
-        if(loopStartIds.find(lineNum) != loopStartIds.end()){
-            start_loop = true;
-        }else{
-            start_loop = false;
-        }
+        // if(loopStartIds.find(lineNum) != loopStartIds.end()){
+        //     start_loop = true;
+        // }else{
+        //     start_loop = false;
+        // }
     }
 
-    current->isEndOfLog = true;
+    if(current->children.size()==0){
+        current->isEndOfLog = true;
+    }
     current->endLogIdx = idx;
     return true;
 }
