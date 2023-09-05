@@ -1,0 +1,80 @@
+[BM][IPC Server handler 2 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 2 on 9000]ID=0,0
+[BM][IPC Server handler 3 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 3 on 9000]ID=0,0
+[BM][IPC Server handler 2 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 2 on 9000]ID=0,0
+[BM][IPC Server handler 4 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 4 on 9000]ID=0,0
+[BM][IPC Server handler 4 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 4 on 9000]ID=0,0
+[BM][IPC Server handler 3 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 3 on 9000]ID=0,0
+[BM][IPC Server handler 9 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 9 on 9000]ID=0,0
+[BM][IPC Server handler 9 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 9 on 9000]ID=0,0
+[BM][IPC Server handler 9 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.setNumBytes(Block.java:-1)
+[BM][IPC Server handler 9 on 9000]ID=1,9223372036854775807
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=99,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=99,
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@72bc6553]ID=99,
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=2,
+[BM][IPC Server handler 57 on 9000]ID=100,0
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=99,
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=2,
+[BM][IPC Server handler 57 on 9000]ID=100,0
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data5/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data6/]]  heartbeating to localhost/127.0.0.1:9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data5/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data6/]]  heartbeating to localhost/127.0.0.1:9000]ID=1,9223372036854775807
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data7/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data8/]]  heartbeating to localhost/127.0.0.1:9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data7/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data8/]]  heartbeating to localhost/127.0.0.1:9000]ID=1,9223372036854775807
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data1/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data2/]]  heartbeating to localhost/127.0.0.1:9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data1/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data2/]]  heartbeating to localhost/127.0.0.1:9000]ID=1,9223372036854775807
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=2,9223372036854775807
+[BM][IPC Server handler 57 on 9000]ID=99,
+[BM][IPC Server handler 9 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 9 on 9000]ID=0,134217728
+[BM][IPC Server handler 1 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 1 on 9000]ID=0,134217728
+[BM][IPC Server handler 1 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 1 on 9000]ID=0,134217728
+[BM][IPC Server handler 57 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 57 on 9000]ID=2,134217728
+[BM][IPC Server handler 57 on 9000]ID=100,0
+[BM][IPC Server handler 98 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 98 on 9000]ID=2,134217728
+[BM][IPC Server handler 98 on 9000]ID=100,0
+[BM][IPC Server handler 98 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 98 on 9000]ID=99,
+[BM][IPC Server handler 98 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 98 on 9000]ID=2,134217728
+[BM][IPC Server handler 98 on 9000]ID=100,0
+[BM][IPC Server handler 98 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 98 on 9000]ID=2,134217728
+[BM][IPC Server handler 98 on 9000]ID=100,0
+[BM][IPC Server handler 3 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 3 on 9000]ID=0,1024
+[BM][IPC Server handler 3 on 9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][IPC Server handler 3 on 9000]ID=0,1024
+[BM][IPC Server handler 3 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 3 on 9000]ID=2,1024
+[BM][IPC Server handler 3 on 9000]ID=100,0
+[BM][IPC Server handler 3 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 3 on 9000]ID=99,
+[BM][IPC Server handler 3 on 9000][Method Entry]org.apache.hadoop.hdfs.server.blockmanagement.BlockPlacementPolicyDefault.chooseRandom(BlockPlacementPolicyDefault.java)
+[BM][IPC Server handler 3 on 9000]ID=1,9223372036854775807
+[BM][IPC Server handler 3 on 9000]ID=2,9223372036854775807
+[BM][IPC Server handler 3 on 9000]ID=99,
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data5/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data6/]]  heartbeating to localhost/127.0.0.1:9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data5/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data6/]]  heartbeating to localhost/127.0.0.1:9000]ID=0,9223372036854775807
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data7/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data8/]]  heartbeating to localhost/127.0.0.1:9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data7/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data8/]]  heartbeating to localhost/127.0.0.1:9000]ID=0,9223372036854775807
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data1/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data2/]]  heartbeating to localhost/127.0.0.1:9000][Method Entry]org.apache.hadoop.hdfs.protocol.Block.set(Block.java:-1)
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data1/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data2/]]  heartbeating to localhost/127.0.0.1:9000]ID=0,9223372036854775807

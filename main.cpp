@@ -18,8 +18,13 @@
 #define DIV 0
 #define TRACE 1
 #define ARG 2
+#define ECOMPARE -3
+#define ENOOPEN -2
 
-Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds);                                                                                                           
+int find_divergence(std::string file_path, std::string failureIndicator, std::string newLogIndicator);
+int find_caller(std::string file_path, std::string failureIndicator, std::string caller_for);
+int find_value(std::string file_path, std::string failureIndicator, std::string read_method);
+
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
     
     // std::string file_path = "logs/step1a2.log";
@@ -39,15 +44,16 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     std::cout << "file path: " << file_path << std::endl;
     if (!file1.is_open()) {
         std::cout << "Failed to open logs." << std::endl;
-        return 1;
+        return ENOOPEN;
     }
 
     
     // std::string failureIndicator = "BlockManager$ReplicationMonitor"; // using thread name for now
-    std::string failureIndicator = "ID=99"; 
+    
     int failure_id = 99;
+    std::string failureIndicator = "ID=" + std::to_string(failure_id); 
     std::string newLogIndicator = "Method Entry";   // start new log
-    std::string arg_value = "-1"; std::string caller_for = "";
+    std::string arg_value = "-1"; std::string caller_for = ""; std::string read_method = "";
     if(argc>=4){
         failureIndicator = argv[3];
         std::cout << "Indicator: " << failureIndicator << std::endl;
@@ -56,96 +62,30 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         newLogIndicator = argv[4];
         if(what_to_do==TRACE){
             caller_for = argv[4];
+        }else if(what_to_do==ARG){
+            read_method = argv[4];
         }
     }
     
-    std::string line; 
+     
     if(what_to_do == TRACE){    ////// TODO = 1 //// PRINT STACK TRACE ///////////////////////////
-        std::cout << "______" << std::endl;
-        std::cout << "use stack trace" << std::endl;
-        std::cout << "failureIndicator " << failureIndicator << std::endl;
-        std::string traceStartIndicator = "Start Stack Trace";   // start new log
-        std::string traceEndIndicator = "End Stack Trace"; 
-
-        bool next = false; bool found = false;
-        std::string::size_type temp_id;
         
-        std::vector<Trace*> failed_traces;
-        std::unordered_map<std::string, Trace*> thread_traces;
-        Trace* current_trace;
-        bool tracing = false;
-        while(std::getline(file1, line)){
-            temp_id = line.find(traceStartIndicator);
-            if(temp_id != std::string::npos){
-                std::string thread = line.substr(temp_id+traceStartIndicator.length()+2);
-                temp_id = thread.find("]");
-                if(temp_id != std::string::npos){
-                    thread = thread.substr(0, temp_id);
-                }
-                current_trace = new Trace(thread); current_trace->fail = false;
-                thread_traces[thread] = current_trace;
-                tracing = true;
-                continue;
-            }
+        return find_caller(file_path, failureIndicator, caller_for);
+    
+    }else if(what_to_do == DIV){
 
-            temp_id = line.find(traceEndIndicator);
-            if(temp_id != std::string::npos){
-                std::string thread = line.substr(temp_id+traceEndIndicator.length()+2);
-                temp_id = thread.find("]");
-                if(temp_id != std::string::npos){
-                    thread = thread.substr(0, temp_id);
-                }
-                tracing = false;
-            }
+        return find_divergence(file_path, failureIndicator, newLogIndicator);
+    
+    }else if(what_to_do == ARG){ ///// TODO = 2 /////////// VARIABLE //////////////////////////////////
 
-            temp_id = line.find(failureIndicator); // "ID=99"
-            if(temp_id != std::string::npos){
-                std::string thread = line.substr(5);
-                temp_id = thread.find("]");
-                if(temp_id != std::string::npos){
-                    thread = thread.substr(0, temp_id);
-                }
-                if(thread_traces.find(thread)!=thread_traces.end()){
-                    if(thread_traces[thread]->fail==false){
-                        thread_traces[thread]->fail = true;
-                        failed_traces.push_back(thread_traces[thread]);
-                    }
-                }
-            }
+        return find_value(file_path, failureIndicator, read_method);
 
-            if(tracing){
-                current_trace->lines.push_back(line);
-            }
-        }
-        std::cout << "# failed: " << failed_traces.size() << std::endl;
-        if(failed_traces.size()==0){
-            std::cout << "Did not find stack trace of " << failureIndicator << std::endl;
-            return 1;
-        }
-        
-        for(int i=0; i<failed_traces.size(); i++){
-            std::cout << "trace " << i << std::endl ;
-            failed_traces[i]->print();
-            std::cout << std::endl;
-        }
-        for(int i=0; i<failed_traces.size(); i++){
-            std::cout << "trace " << i << std::endl ;
-            Caller caller = failed_traces[i]->find_caller(caller_for);
-            if(caller.valid){
-                std::cout << "caller of " << caller_for << ": " << std::endl;
-                std::cout << caller.function_name << ", line: " << caller.line_number << std::endl;
-            }else{
-                std::cout << "did not find caller of " << caller_for << std::endl;
-            }
-        }
-        return 0;
-    }
-    else if(what_to_do == ARG){ ///// TODO = 2 /////////// VARIABLE //////////////////////////////////
-        std::cout << "searching for argument value " << arg_value << std::endl;
+        std::cout << "searching for argument value of ID : " << read_method << std::endl;
         bool found = false;
         std::string arg_value = ""; 
         std::string::size_type temp_id;
         Log* log = new Log(); int idx = 0;
+        std::string line;
         while(std::getline(file1, line)){
             std::string::size_type temp_id = line.find("Stack Trace");
             if(temp_id != std::string::npos){ continue; } // stack trace, ignore
@@ -153,7 +93,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
             if(temp_id == std::string::npos){ continue; } // no BM, is stack trace, ignore
             log->to_parse.push_back(line);
             log->parseNextLine();
-            temp_id = line.find("Target");
+            temp_id = line.find(read_method);
             if(temp_id != std::string::npos){
                 temp_id = line.find(failureIndicator);
                 if(temp_id != std::string::npos){
@@ -189,14 +129,21 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
         }
         return 0;
     }
-    
 
-    std::vector<Log*> succeeds; // /////////// FIND DIVERGENCE //////////////////////////////////
+}
+ 
+int find_divergence(std::string file_path, std::string failureIndicator, std::string newLogIndicator){
+    std::vector<Log*> succeeds; 
     std::vector<Log*> fails;
-    // std::cout << "HERE" << std::endl;
     std::unordered_map<std::string, Log*> threads; // newest log from that thread
     Log* log = nullptr;
-    
+    std::ifstream file1(file_path);
+    std::cout << "file path: " << file_path << std::endl;
+    if (!file1.is_open()) {
+        std::cout << "Failed to open logs." << std::endl;
+        return ENOOPEN;
+    }
+    std::string line;
     while(std::getline(file1, line)){
         bool newLog = false; std::string thread = ""; 
         // std::cout << line << std::endl; 
@@ -265,7 +212,7 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     
     if(fails.size()==0){
         std::cout << "did not find log for failure runs" << std::endl;
-        return 1;
+        return ECOMPARE;
     }
     
     
@@ -273,40 +220,16 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     std::cout << "# of succs: " << succeeds.size() << std::endl;
     file1.close(); 
     
-    std::cout << "here" << std::endl;
-    fails[0]->parseAll();
-    for (int i = 1; i < fails[0]->parsed.size(); i++) {
-        int lineNum = -1; int loopId = -1;
-        Event* e = fails[0]->getEvent(i);
-        if(e==nullptr){
-            std::cout << "null Event in log, idx: " << i << std::endl;
-            continue;
-        }else{
-            lineNum = e->lineNum; loopId = e->loopId;
-        }
-        std::cout << " lineNum: " << lineNum << " loop: " << loopId << std::endl;
-    }
-   
     std::cout << "/////////////////////////" << std::endl;
     
     Trie* fail = new Trie();
     Trie* succeed = new Trie();
     for(int i=0; i<fails.size(); i++){
-        std::cout << std::endl << std::endl << "FAILURE LOG " << i  << "!!!!" << std::endl;
         fails[i]->parseAll();
         fail->insertLog(fails[i], i);
-        std::cout << std::endl << std::endl << "END FAILURE LOG " << i  << "!!!!" << std::endl;
     }
 
-    std::cout << std::endl <<  "//// RESULT //////////////" << std::endl;
-    fail->print_Trie();
-
-    //return 0;
-
-
-    std::cout << "/////////////////////////###############" << std::endl;
     for(int i=0; i<succeeds.size(); i++){
-
         succeeds[i]->parseAll();
         succeed->insertLog(succeeds[i], i);
     }
@@ -326,117 +249,205 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     }
     std::cout << std::endl;
     if(result.div){
-        std::cout << "div at " << result.prefix.back();
+        std::cout << "div at " << result.prefix.back() << std::endl;
+        return result.prefix.back();
     }
     else{
-        std::cout << "no divergence";
-    }
-    std::cout << std::endl;
-    return 0;
-    
-    
-    
-    
-    
-//    DONE collecting the log, start comparing 
-    std::cout << std::endl;
-    if(what_to_do == DIV){ 
-        std::cout << "comparing logs ///" << std::endl;
-        auto result = logCompare(fails, succeeds); //// COMPARE ////////////////
-        int length = result.prefix.size();
-        std::cout << "length: " << (length) << ". ";
-        std::cout << "prefix: " << std::endl;
-        for(int i=0; i<result.prefix.size(); i++){
-            std::cout << result.prefix[i].idx << ":ID=" << result.prefix[i].lineNum << " ";
-        }
-        std::cout << "______" << std::endl;
-            
-        if( result.div ){
-            std::cout << "Diverge at: " ; 
-            if(length==0){ // div at the beginning
-                if(result.failed->parsed.size()>1 && result.failed->getEvent(0)->lineNum==-1){
-                  std::cout << "HERE" << std::endl;
-                  result.failed->getEvent(1)->print();
-                }else{
-                    result.failed->getEvent(0)->print();
-                }
-            }else if(length==1){
-                if(result.failed->parsed.size()>1 && result.prefix.back().lineNum==-1){ // the first one is entry
-                    result.failed->getEvent(1)->print(); // print the first one after the entry
-                }else{
-                    result.prefix.back().print();
-                }
-            }else {
-                result.prefix.back().print();
-            }
-            std::cout << std::endl;
-        }else{
-            std::cout << std::endl << std::endl;
-            std::cout << "No divergence" << std::endl;
+        std::cout << "no divergence" << std::endl;
+        for (auto& child : fail->root->children) {
+            std::cout << "continue at " << child.first << std::endl;
+            return child.first;
         }
     }
-    return 0;
+    std::cout << std::endl;
+    return ECOMPARE;
 }
 
-/* seenIds
-Failed Run: 
-L2 val=3 L3 true L4 false L3 true L4 false L3 true L4 false L6 true L7 fail 
-Successful Runs: 
-Run 0: L2 val=3 L3 true L4 true L5 val=2 L3 true L4 true L5 val=1 L3 true L4 true L5 val=0 L6 false 
-Run 1: L2 val=3 L3 true L4 trueseenIds L5 val=2 L3 true L4 false L3 true L4 false L3 true L4 true L5 val=1 L3 true L4 true L5 val=0 L6 false 
-Run 2: L2 val=4 L3 true L4 false L3 true L4 true L5 val=3 L3 true L4 true L5 val=2 L3 true L4 true L5 val=1 L3 true L4 true L5 val=0 L6 false 
+std::vector<int> instrumentationLineNumbers;
 
-//// if we consider CE with different value (True / False) as different log:
-Prefix: 
-L2 L3 L4 L3 
-Longest: 
-L2 L3 L4 L3 L4 L5 L3 L4 L5 L3 L4 L5 L3 L4 L5 L6 
-// diverge at L3
+int find_caller(std::string file_path, std::string failureIndicator, std::string caller_for){
 
-//// otherwise:
-Prefix: 
-L2 L3 L4 L3 L4 
-Longest: 
-L2 L3 L4 L3 L4 L5 L3 L4 L5 L3 L4 L5 L3 L4 L5 L6 
-// diverge at L4
-*/
+    std::cout << "use stack trace" << std::endl;
+    std::cout << "failureIndicator " << failureIndicator << std::endl;
+    std::string traceStartIndicator = "Start Stack Trace";   // start new log
+    std::string traceEndIndicator = "End Stack Trace"; 
 
+    std::ifstream file1(file_path);
+    std::cout << "file path: " << file_path << std::endl;
+    if (!file1.is_open()) {
+        std::cout << "Failed to open logs." << std::endl;
+        return ENOOPEN;
+    }
 
-Prefix logCompare(std::vector<Log*> fails, std::vector<Log*> succeeds){
-    std::vector<Event> prefix; // longest common prefix
+    std::string::size_type temp_id;
     
-    int max_length = 0; // longest prefix length
-    int max_total = 0;
-    int max_idx = 0; int k=0;
+    std::vector<Trace*> failed_traces;
+    std::unordered_map<std::string, Trace*> thread_traces;
+    Trace* current_trace;
+    bool tracing = false;
 
-    Prefix out; out.length=0; out.failed=nullptr;
-    if(succeeds.size()==0) {return out;}
-    for(int i=0; i<fails.size(); i++){
-        fails[i]->parseAll();
-        if(fails[i]->parsed.size()>max_total){
-            max_total = fails[i]->parsed.size();
-            k = i;
+    std::string line;
+    while(std::getline(file1, line)){
+        temp_id = line.find(traceStartIndicator);
+        if(temp_id != std::string::npos){
+            std::string thread = line.substr(temp_id+traceStartIndicator.length()+2);
+            temp_id = thread.find("]");
+            if(temp_id != std::string::npos){
+                thread = thread.substr(0, temp_id);
+            }
+            current_trace = new Trace(thread); current_trace->fail = false;
+            thread_traces[thread] = current_trace;
+            tracing = true;
+            continue;
+        }
+
+        temp_id = line.find(traceEndIndicator);
+        if(temp_id != std::string::npos){
+            std::string thread = line.substr(temp_id+traceEndIndicator.length()+2);
+            temp_id = thread.find("]");
+            if(temp_id != std::string::npos){
+                thread = thread.substr(0, temp_id);
+            }
+            tracing = false;
+        }
+
+        temp_id = line.find(failureIndicator); // "ID=99"
+        if(temp_id != std::string::npos){
+            std::string thread = line.substr(5);
+            temp_id = thread.find("]");
+            if(temp_id != std::string::npos){
+                thread = thread.substr(0, temp_id);
+            }
+            if(thread_traces.find(thread)!=thread_traces.end()){
+                if(thread_traces[thread]->fail==false){
+                    thread_traces[thread]->fail = true;
+                    failed_traces.push_back(thread_traces[thread]);
+                }
+            }
+        }
+
+        if(tracing){
+            current_trace->lines.push_back(line);
         }
     }
-    std::cout << "k " << k << " length " << max_total << std::endl;
-    max_total=0;
-    for(int j=0; j<succeeds.size(); j++){
-        // int length = compare_one_log(failed, succeeds[i]);  
-        std::cout << "comparing " << j << std::endl;
-        // auto result = compare_log_contexts(failed, succeeds[i]);
-        auto result = compare_log_maploops(fails[k], succeeds[j]);
-        int length = result.first;
-        if(length > max_length || (length == max_length && fails[k]->parsed.size() > max_total) ){
-            out.failed = fails[k];
-            out.prefix = result.second;
-            out.length = length;
-            out.div = (length!=fails[k]->parsed.size() || length!=succeeds[j]->parsed.size());
-            max_length = length; // update max length
-            max_idx = j; // the run index in vector woth longest common prefix
-            max_total = fails[k]->parsed.size();
-        }
+    std::cout << "# failed: " << failed_traces.size() << std::endl;
+    if(failed_traces.size()==0){
+        std::cout << "Did not find stack trace of " << failureIndicator << std::endl;
+        return ECOMPARE;
     }
     
-    return out; //std::make_pair(max_length, succeeds[max_idx]);
-} 
- 
+    for(int i=0; i<failed_traces.size(); i++){
+        std::cout << "trace " << i << std::endl ;
+        failed_traces[i]->print();
+        std::cout << std::endl;
+    }
+    for(int i=0; i<failed_traces.size(); i++){
+        std::cout << "trace " << i << std::endl ;
+        Caller caller = failed_traces[i]->find_caller(caller_for);
+        if(caller.valid){
+            std::cout << "caller of " << caller_for << ": " << std::endl;
+            std::cout << caller.function_name << ", line: " << caller.line_number << std::endl;
+        }else{
+            std::cout << "did not find caller of " << caller_for << std::endl;
+        }
+    }
+    return ECOMPARE;
+}
+
+int find_value(std::string file_path, std::string failureIndicator, std::string read_method){
+    std::cout << "searching for argument value of ID : " << read_method << std::endl;
+
+    std::ifstream file1(file_path);
+    std::cout << "file path: " << file_path << std::endl;
+    if (!file1.is_open()) {
+        std::cout << "Failed to open logs." << std::endl;
+        return ENOOPEN;
+    }
+
+    bool found = false;
+    std::string arg_value = ""; 
+    std::string::size_type temp_id;
+    // Log* log = new Log(); 
+    std::string line; std::vector<std::string> lines;
+
+    while(std::getline(file1, line)){
+        std::string::size_type temp_id = line.find("Stack Trace");
+        if(temp_id != std::string::npos){ continue; } // stack trace, ignore
+        temp_id = line.find("BM");
+        if(temp_id == std::string::npos){ continue; } // no BM, is stack trace
+        lines.push_back(line);
+    }
+    file1.close();
+
+    std::cout << "#lines: " << lines.size() << std::endl;
+    if(lines.size()==0){
+        std::cout << "no log" << std::endl;
+        return ECOMPARE;
+    }
+    int ID=ECOMPARE; std::vector<int> IDs;
+    std::unordered_set<std::string> threads_fails;
+    std::unordered_map<std::string, int> value_lines; // value to line number
+
+    
+    for(int i=lines.size()-1; i>=0; i-=1){
+        line = lines[i];
+        // std::cout << i << ": " << line << std::endl;
+
+        temp_id = line.find(failureIndicator);
+        if(temp_id != std::string::npos){
+            line = line.substr(5); // get rid of [BM][
+            temp_id = line.find("]");
+            if(temp_id != std::string::npos){ 
+                std::string thread = line.substr(0, temp_id); // thread name
+                threads_fails.insert(thread);
+            }
+        }
+
+        temp_id = line.find(read_method);
+        if(temp_id != std::string::npos){
+            line = line.substr(5); // get rid of [BM][
+            temp_id = line.find("]");
+            if(temp_id != std::string::npos){ 
+                std::string thread = line.substr(0, temp_id); // thread name
+                if (threads_fails.find(thread) != threads_fails.end()){
+                    found = true;
+                    temp_id = line.find(","); 
+                    if(temp_id != std::string::npos){ 
+                        std::string value = line.substr(temp_id+1);
+                        threads_fails.erase(thread);
+                        value_lines.insert({value, i});
+                        std::cout << "add target value " << value << std::endl;
+                    }
+                }
+            }
+            continue;
+        }
+
+        temp_id = line.find(","); 
+        if(temp_id != std::string::npos){ 
+            std::string value = line.substr(temp_id+1);
+            if(value_lines.find(value)!=value_lines.end()){
+                std::cout << "target value found: " << value << std::endl;
+                line = line.substr(0, temp_id);
+                temp_id = line.find("ID="); 
+                if(temp_id != std::string::npos){ 
+                    std::string id_str = line.substr(temp_id+3);
+                    ID = std::stoi(id_str); IDs.push_back(ID);
+                    std::cout << "ID=" << ID << ", " << value << std::endl;
+                }
+            }
+        }
+    }
+
+    if(!found){
+        std::cout << "______" << std::endl;
+        std::cout << "did not find value as target" << std::endl;
+        return ECOMPARE;
+    }
+
+    if(ID==ECOMPARE){
+        std::cout << "did not find target value" << std::endl;
+    }
+    std::cout << "ID selected: " << ID << std::endl;
+    return ID;
+}

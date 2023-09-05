@@ -116,9 +116,9 @@ bool process_normal(std::string file_path, std::string out_path, std::string suc
             // log = threads[thread]; // current log of that thread
         }
         
-        if( !is_succeed_marker){
+        // if( !is_succeed_marker){
             file2 << line << "\n";
-        }
+        // }
     }
     if(!succeed){
         file2 << "[BM][" << prev << "]ID=" << fail_id << ",\n";

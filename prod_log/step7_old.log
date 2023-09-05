@@ -1,0 +1,70 @@
+[BM][IPC Server handler 9 on 33573]ID=0,0
+[BM][IPC Server handler 9 on 33573]ID=0,0
+[BM][IPC Server handler 6 on 33573]ID=0,0
+[BM][IPC Server handler 7 on 33573]ID=0,0
+[BM][IPC Server handler 6 on 33573]ID=0,0
+[BM][IPC Server handler 8 on 33573]ID=0,0
+[BM][IPC Server handler 7 on 33573]ID=0,0
+[BM][IPC Server handler 8 on 33573]ID=0,0
+[BM][IPC Server handler 2 on 33573]ID=0,0
+[BM][IPC Server handler 2 on 33573]ID=0,0
+[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
+[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
+[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
+[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
+[BM][IPC Server handler 4 on 33573]ID=0,0
+[BM][IPC Server handler 4 on 33573]ID=0,0
+[BM][IPC Server handler 4 on 33573]ID=0,0
+[BM][IPC Server handler 4 on 33573]ID=0,0
+[BM][IPC Server handler 4 on 33573]ID=0,0
+[BM][IPC Server handler 4 on 33573]ID=0,0
+[BM][Thread-209]ID=0,0
+[BM][Thread-209]ID=1,0
+[BM][DataXceiver for client /127.0.0.1:33408 [Waiting for operation #1]]ID=0,0
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:33408 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=0,0
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:33408 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=1,134217728
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:33408 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=0,0
+[BM][DataXceiver for client /127.0.0.1:51510 [Waiting for operation #1]]ID=0,0
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:51510 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=0,0
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:51510 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=1,134217728
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:51510 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=0,0
+[BM][DataXceiver for client /127.0.0.1:43800 [Waiting for operation #1]]ID=0,0
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:43800 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=0,0
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:43800 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=1,134217728
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:43800 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=0,0
+[BM][IPC Server handler 6 on 33573]ID=0,134217728
+[BM][IPC Server handler 6 on 33573]ID=0,134217728
+[BM][IPC Server handler 7 on 33573]ID=0,134217728
+[BM][IPC Server handler 9 on 33573]ID=0,134217728
+[BM][IPC Server handler 7 on 33573]ID=0,134217728
+[BM][IPC Server handler 7 on 33573]ID=0,134217728
+[BM][IPC Server handler 9 on 33573]ID=0,134217728
+[BM][IPC Server handler 9 on 33573]ID=0,134217728
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:33408 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=1,1024
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:51510 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=1,1024
+[BM][DataXceiver for client DFSClient_NONMAPREDUCE_-156351338_1 at /127.0.0.1:43800 [Receiving block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]]ID=1,1024
+[BM][ResponseProcessor for block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]ID=1,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=LAST_IN_PIPELINE, downstreams=0:[]]ID=1,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=LAST_IN_PIPELINE, downstreams=0:[]]ID=0,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=LAST_IN_PIPELINE, downstreams=0:[]]ID=0,1024
+[BM][IPC Server handler 2 on 33573]ID=0,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=1,1024
+[BM][IPC Server handler 2 on 33573]ID=0,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=1,1024
+[BM][IPC Server handler 1 on 33573]ID=0,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
+[BM][PacketResponder: BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001, type=HAS_DOWNSTREAM_IN_PIPELINE]ID=0,1024
+[BM][ResponseProcessor for block BP-313428926-172.31.40.143-1687892637320:blk_1073741825_1001]ID=1,1024
+[BM][IPC Server handler 3 on 33573]ID=0,1024
+[BM][IPC Server handler 0 on 33573]ID=0,1024
+[BM][IPC Server handler 1 on 33573]ID=0,1024
+[BM][IPC Server handler 3 on 33573]ID=0,1024
+[BM][IPC Server handler 0 on 33573]ID=0,1024
+[BM][IPC Server handler 0 on 33573]ID=0,1024
+[BM][IPC Server handler 5 on 33573]ID=1,9223372036854775807
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab][Target],ID=-1,9223372036854775807
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data9/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data10/]]  heartbeating to localhost/127.0.0.1:33573]ID=0,9223372036854775807
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data5/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data6/]]  heartbeating to localhost/127.0.0.1:33573]ID=0,9223372036854775807
+[BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data3/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data4/]]  heartbeating to localhost/127.0.0.1:33573]ID=0,9223372036854775807
