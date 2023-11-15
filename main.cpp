@@ -22,13 +22,13 @@
 #define ENOOPEN -2
 
 int find_divergence(std::string file_path, std::string failureIndicator, std::string newLogIndicator);
-int find_caller(std::string file_path, std::string failureIndicator, std::string caller_for);
+int find_caller(std::string file_path, std::string failureIndicator, std::string caller_for, int target_line);
 int find_value(std::string file_path, std::string failureIndicator, std::string read_method);
 
 int main (int argc, char *argv[]){    ////////////////////////////////////////////////////////////////////
     
     // std::string file_path = "logs/step1a2.log";
-    std::string file_path = "prod_log/step1_99.log";
+    std::string file_path = "prod_log/npe/step2_6_cleaned.log";
     std::string base_path = "/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/src/main/java/";
     int what_to_do = DIV; 
     
@@ -52,7 +52,8 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
     
     int failure_id = 99;
     std::string failureIndicator = "ID=" + std::to_string(failure_id); 
-    std::string newLogIndicator = "Method Entry";   // start new log
+    // std::string newLogIndicator = "Method Entry";   // start new log
+    std::string newLogIndicator = "ID=1"; 
     std::string arg_value = "-1"; std::string caller_for = ""; std::string read_method = "";
     if(argc>=4){
         failureIndicator = argv[3];
@@ -66,11 +67,16 @@ int main (int argc, char *argv[]){    //////////////////////////////////////////
             read_method = argv[4];
         }
     }
-    
+    int target_line = -1;
+    if(argc>=6){
+        if(what_to_do==TRACE){
+            target_line = std::stoi(argv[5]);
+        }
+    }
      
     if(what_to_do == TRACE){    ////// TODO = 1 //// PRINT STACK TRACE ///////////////////////////
         
-        return find_caller(file_path, failureIndicator, caller_for);
+        return find_caller(file_path, failureIndicator, caller_for, target_line);
     
     }else if(what_to_do == DIV){
 
@@ -265,7 +271,7 @@ int find_divergence(std::string file_path, std::string failureIndicator, std::st
 
 std::vector<int> instrumentationLineNumbers;
 
-int find_caller(std::string file_path, std::string failureIndicator, std::string caller_for){
+int find_caller(std::string file_path, std::string failureIndicator, std::string caller_for, int target_line){
 
     std::cout << "use stack trace" << std::endl;
     std::cout << "failureIndicator " << failureIndicator << std::endl;
@@ -343,7 +349,7 @@ int find_caller(std::string file_path, std::string failureIndicator, std::string
     }
     for(int i=0; i<failed_traces.size(); i++){
         std::cout << "trace " << i << std::endl ;
-        Caller caller = failed_traces[i]->find_caller(caller_for);
+        Caller caller = failed_traces[i]->find_caller(caller_for, target_line);
         if(caller.valid){
             std::cout << "caller of " << caller_for << ": " << std::endl;
             std::cout << caller.function_name << ", line: " << caller.line_number << std::endl;

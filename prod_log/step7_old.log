@@ -8,10 +8,10 @@
 [BM][IPC Server handler 8 on 33573]ID=0,0
 [BM][IPC Server handler 2 on 33573]ID=0,0
 [BM][IPC Server handler 2 on 33573]ID=0,0
-[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
-[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
-[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
-[BM][IPC Server handler 4 on 33573][Target],ID=-1,134217728
+[BM][IPC Server handler 4 on 33573]ID=2,134217728
+[BM][IPC Server handler 4 on 33573]ID=2,134217728
+[BM][IPC Server handler 4 on 33573]ID=2,134217728
+[BM][IPC Server handler 4 on 33573]ID=2,134217728
 [BM][IPC Server handler 4 on 33573]ID=0,0
 [BM][IPC Server handler 4 on 33573]ID=0,0
 [BM][IPC Server handler 4 on 33573]ID=0,0
@@ -64,7 +64,7 @@
 [BM][IPC Server handler 0 on 33573]ID=0,1024
 [BM][IPC Server handler 0 on 33573]ID=0,1024
 [BM][IPC Server handler 5 on 33573]ID=1,9223372036854775807
-[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab][Target],ID=-1,9223372036854775807
+[BM][org.apache.hadoop.hdfs.server.blockmanagement.BlockManager$ReplicationMonitor@63070bab]ID=2,9223372036854775807
 [BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data9/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data10/]]  heartbeating to localhost/127.0.0.1:33573]ID=0,9223372036854775807
 [BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data5/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data6/]]  heartbeating to localhost/127.0.0.1:33573]ID=0,9223372036854775807
 [BM][DataNode: [[[DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data3/, [DISK]file:/home/ubuntu/hadoop/hadoop-hdfs-project/hadoop-hdfs/target/test/data/dfs/data/data4/]]  heartbeating to localhost/127.0.0.1:33573]ID=0,9223372036854775807
